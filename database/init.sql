@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS jobs (
+    id SERIAL PRIMARY KEY,
+    seed BIGINT NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
+    progress INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS structures (
+    id SERIAL PRIMARY KEY,
+    job_id INTEGER REFERENCES jobs(id),
+    type VARCHAR(100),
+    x INTEGER,
+    z INTEGER
+);

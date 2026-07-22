@@ -1,0 +1,31 @@
+# Environment variables
+.env
+
+# Node
+node_modules/
+.next/
+out/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env.*
+
+# Keep example env
+!.env.example
+
+# C++ build files
+worker/build/
+*.o
+*.out
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Docker
+postgres_data/
