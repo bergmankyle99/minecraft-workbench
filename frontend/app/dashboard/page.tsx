@@ -74,7 +74,6 @@ function DashboardPage() {
 
         const data = await res.json();
         setResult(data.structures);
-        console.log(data.structures);
     };
 
     return (
@@ -102,10 +101,6 @@ function DashboardPage() {
 
             <button onClick={submit}>Find</button>
 
-
-            {/* {result && (
-            <pre>{JSON.stringify(result, null, 2)}</pre>
-        )} */}
             <div className="structures">
                 {result.map((structures, index) => (
                     <div className="structure" key={index}>

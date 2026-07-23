@@ -95,4 +95,4 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user')
 
 def get_user_by_username(db: Session, username: str):
-    return db.query(Users).filter(Users.username == usernmae).first()
+    return db.query(Users).filter(Users.username == username).first()

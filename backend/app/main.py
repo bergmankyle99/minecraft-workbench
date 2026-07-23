@@ -38,25 +38,11 @@ async def user(user: user_dependency, db: db_dependency):
     return {"User": user}
 
 
-
-
 class StructureRequest(BaseModel):
     seed: int
     structure: str
     limit: int
     dimension: int
-
-# class StructureSearchRequest(BaseModel):
-#     seed: int
-#     structure: str
-#     limit: int
-#     dimension: int
-#     user_id: int
-
-# class StructureSearchResults(BaseModel):
-#     structureType: str
-#     x: int
-#     z: int
 
 @app.post("/structure-finder")
 async def structure_finder(db: db_dependency, request: StructureRequest, user: user_dependency):
