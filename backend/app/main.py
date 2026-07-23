@@ -64,7 +64,13 @@ async def structure_finder(request: StructureRequest):
     )
 
     return {
-        "Village": closest_village
+        "structures": [
+        {
+            "structureType": request.structure,
+            "x": closest_village[0],
+            "z": closest_village[1]
+        }
+    ]
     }
 
 def parseStructure(structureStr: str):

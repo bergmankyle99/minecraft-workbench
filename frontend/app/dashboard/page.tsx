@@ -1,5 +1,85 @@
 "use client";
-function DashboardPage(){
-    return <div>This is a dashboard page. only visible to authenticated users</div>
+
+import { useEffect, useRef, useState } from "react";
+
+function DashboardPage() {
+    const [structureJob, setStructureJob] = useState<string | null>(null);
+    type Structure = {
+        structureType: number;
+        x: number;
+        z: number;
+    };
+    // refs (NO STATE FOR INPUTS)
+    const seedRef = useRef<HTMLInputElement>(null);
+    // const versionRef = useRef<HTMLInputElement>(null);
+    const typeRef = useRef<HTMLInputElement>(null);
+    const limit = useRef<HTMLInputElement>(null);
+    const [result, setResult] = useState<Structure[]>([]);
+    const submit = async () => {
+        const res = await fetch("http://localhost:8000/structure-finder", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                seed: Number(seedRef.current?.value ?? 12345),
+                structure: typeRef.current?.value ?? "Village",
+                limit: Number(limit.current?.value ?? 1000),
+            }),
+        });
+
+        const data = await res.json();
+        setResult(data.structures);
+    };
+    // useEffect(() => {
+    //     if (!structureJob) return;
+
+    //     const interval = setInterval(async () => {
+    //         const res = await fetch(`http://localhost:8000/jobs/${structureJob}`);
+    //         const data = await res.json();
+
+    //         console.log("structure job:", data);
+
+    //         if (data.state === "done") {
+    //             clearInterval(interval);
+
+    //             const parsed =
+    //                 typeof data.result === "string"
+    //                     ? JSON.parse(data.result)
+    //                     : data.result;
+
+    //             setResult(parsed.structures);
+
+    //         }
+    //     }, 1000);
+
+    //     return () => clearInterval(interval);
+    // }, [structureJob]);
+
+    return (
+        <div>
+            {/* STRUCTURE FINDER */}
+            < h2 > Find Structures</h2 >
+
+            <input ref={seedRef} placeholder="Seed" defaultValue={12345} />
+            {/* <input ref={versionRef} placeholder="Version" defaultValue="22" /> */}
+            <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" />
+            <input ref={limit} placeholder="Limit" defaultValue={1000} />
+
+            <button onClick={submit}>Find</button>
+
+
+            {/* {result && (
+            <pre>{JSON.stringify(result, null, 2)}</pre>
+        )} */}
+            <div className="structures">
+                {result.map((structure, index) => (
+                    <div className="structure" key={index}>
+                        <p>{structure.structureType}</p>
+                        <p>X: {structure.x}</p>
+                        <p>Z: {structure.z}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 }
 export default DashboardPage
