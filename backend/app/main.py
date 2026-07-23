@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from cubiomespi import Generator, MCVersion, Dimension, BiomeID, Structure
 from pydantic import BaseModel
 
-#fastapi initialization and entry point
+#fastapi initialization and entry point, fastapi instance
 app = FastAPI()
 
 #add cors middleware to allow connecting to api via frontend
@@ -22,9 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-#include the auth route in main
+#include the auth route in main, allows for authentication routes in fastapi app
 app.include_router(auth.router)
-#bind tables to the docker container and create tables from models
+#create tables from sqlalchemy models if they dont exist
 models.Base.metadata.create_all(bind = engine)
 
 #get the database session, db dependency depends on this to run
