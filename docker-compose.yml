@@ -50,17 +50,17 @@ services:
       - backend
 
 
-  worker:
-    build:
-      context: ./worker
+  # worker:
+  #   build:
+  #     context: ./worker
 
-    container_name: minecraft-worker
+  #   container_name: minecraft-worker
 
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
+  #   environment:
+  #     DATABASE_URL: ${DATABASE_URL}
 
-    depends_on:
-      - postgres
+  #   depends_on:
+  #     - postgres
 
 
 volumes:

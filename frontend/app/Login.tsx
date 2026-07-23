@@ -40,7 +40,7 @@ function Login(){
             if(response.ok){
                 const data = await response.json();
                 localStorage.setItem('token', data.access_token);
-                router.push("/protected");
+                router.push("/dashboard");
             }else{
                 const errorData = await response.json();
                 setError(errorData.detail || "Auth Failed");
