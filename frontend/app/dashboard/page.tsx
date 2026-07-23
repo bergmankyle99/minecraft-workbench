@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 function DashboardPage() {
-    const [structureJob, setStructureJob] = useState<string | null>(null);
     type Structure = {
         structureType: number;
         x: number;
@@ -13,6 +12,7 @@ function DashboardPage() {
     const seedRef = useRef<HTMLInputElement>(null);
     // const versionRef = useRef<HTMLInputElement>(null);
     const typeRef = useRef<HTMLSelectElement>(null);
+    const dimensionRef = useRef<HTMLSelectElement>(null);
     const limit = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<Structure[]>([]);
     const submit = async () => {
@@ -21,6 +21,7 @@ function DashboardPage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 seed: Number(seedRef.current?.value ?? 12345),
+                dimension: Number(dimensionRef.current?.value ?? 0),
                 structure: typeRef.current?.value ?? "Village",
                 limit: Number(limit.current?.value ?? 1000),
             }),
@@ -29,30 +30,6 @@ function DashboardPage() {
         const data = await res.json();
         setResult(data.structures);
     };
-    // useEffect(() => {
-    //     if (!structureJob) return;
-
-    //     const interval = setInterval(async () => {
-    //         const res = await fetch(`http://localhost:8000/jobs/${structureJob}`);
-    //         const data = await res.json();
-
-    //         console.log("structure job:", data);
-
-    //         if (data.state === "done") {
-    //             clearInterval(interval);
-
-    //             const parsed =
-    //                 typeof data.result === "string"
-    //                     ? JSON.parse(data.result)
-    //                     : data.result;
-
-    //             setResult(parsed.structures);
-
-    //         }
-    //     }, 1000);
-
-    //     return () => clearInterval(interval);
-    // }, [structureJob]);
 
     return (
         <div>
@@ -62,6 +39,11 @@ function DashboardPage() {
             <input ref={seedRef} placeholder="Seed" defaultValue={12345} />
             {/* <input ref={versionRef} placeholder="Version" defaultValue="22" /> */}
             {/* <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" /> */}
+            <select ref={dimensionRef} defaultValue={0}>
+                <option value="-1">Nether</option>
+                <option value="0">Overworld</option>
+                <option value="1">End</option>
+            </select>
             <select ref={typeRef} defaultValue="Village">
                 <option value="Feature">Feature</option>
                 <option value="Desert Pyramid">Desert Pyramid</option>

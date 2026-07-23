@@ -44,6 +44,7 @@ class StructureRequest(BaseModel):
     seed: int
     structure: str
     limit: int
+    dimension: int
 
 
 @app.post("/structure-finder")
@@ -52,11 +53,9 @@ async def structure_finder(request: StructureRequest):
     generator = Generator(
         MCVersion.MC_1_21,
         request.seed,
-        Dimension.DIM_OVERWORLD
+        request.dimension
     )
-    print(request.limit)
-    print(type(request.limit))
-    closest_village = generator.find_closest_structure(
+    closest_structure = generator.find_closest_structure(
         parseStructure(request.structure),
         0,
         0,
@@ -67,8 +66,8 @@ async def structure_finder(request: StructureRequest):
         "structures": [
         {
             "structureType": request.structure,
-            "x": closest_village[0],
-            "z": closest_village[1]
+            "x": closest_structure[0],
+            "z": closest_structure[1]
         }
     ]
     }
