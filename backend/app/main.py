@@ -6,6 +6,8 @@ from app import models
 from app import auth
 from app.auth import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
+from cubiomespi import Generator, MCVersion, Dimension, BiomeID, Structure
+from pydantic import BaseModel
 app = FastAPI()
 
 app.add_middleware(
@@ -34,3 +36,88 @@ async def user(user: user_dependency, db: db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail="Auth Failed")
     return {"User": user}
+
+
+
+
+class StructureRequest(BaseModel):
+    seed: int
+    structure: str
+    limit: int
+
+
+@app.post("/structure-finder")
+async def structure_finder(request: StructureRequest):
+
+    generator = Generator(
+        MCVersion.MC_1_21,
+        request.seed,
+        Dimension.DIM_OVERWORLD
+    )
+    print(request.limit)
+    print(type(request.limit))
+    closest_village = generator.find_closest_structure(
+        parseStructure(request.structure),
+        0,
+        0,
+        request.limit
+    )
+
+    return {
+        "Village": closest_village
+    }
+
+def parseStructure(structureStr: str):
+    match structureStr:
+        case "Feature":
+            return Structure.Feature[0]
+        case "Desert Pyramid":
+            return Structure.Desert_Pyramid[0]
+        case "Jungle Temple" | "Jungle Pyramid":
+            return Structure.Jungle_Temple[0]
+        case "Swamp Hut":
+            return Structure.Swamp_Hut[0]
+        case "Igloo":
+            return Structure.Igloo[0]
+        case "Village":
+            return Structure.Village[0]
+        case "Ocean Ruin":
+            return Structure.Ocean_Ruin[0]
+        case "Shipwreck":
+            return Structure.Shipwreck[0]
+        case "Monument":
+            return Structure.Monument[0]
+        case "Mansion":
+            return Structure.Mansion[0]
+        case "Outpost":
+            return Structure.Outpost[0]
+        case "Ruined Portal":
+            return Structure.Ruined_Portal[0]
+        case "Ruined Portal N":
+            return Structure.Ruined_Portal_N[0]
+        case "Ancient City":
+            return Structure.Ancient_City[0]
+        case "Treasure":
+            return Structure.Treasure[0]
+        case "Mineshaft":
+            return Structure.Mineshaft[0]
+        case "Desert Well":
+            return Structure.Desert_Well[0]
+        case "Geode":
+            return Structure.Geode[0]
+        case "Fortress":
+            return Structure.Fortress[0]
+        case "Bastion":
+            return Structure.Bastion[0]
+        case "End City":
+            return Structure.End_City[0]
+        case "End Gateway":
+            return Structure.End_Gateway[0]
+        case "End Island":
+            return Structure.End_Island[0]
+        case "Trail Ruin":
+            return Structure.Trail_Ruin[0]
+        case "Trial Chambers":
+            return Structure.Trial_Chambers[0]
+        case _:
+            raise ValueError(f"Unknown structure: {structureStr}")
