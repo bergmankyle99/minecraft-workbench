@@ -52,6 +52,7 @@ function DashboardPage() {
         x: number;
         z: number;
     };
+    const token = localStorage.getItem("token");
     // refs (NO STATE FOR INPUTS)
     const seedRef = useRef<HTMLInputElement>(null);
     // const versionRef = useRef<HTMLInputElement>(null);
@@ -62,7 +63,7 @@ function DashboardPage() {
     const submit = async () => {
         const res = await fetch("http://localhost:8000/structure-finder", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, },
             body: JSON.stringify({
                 seed: Number(seedRef.current?.value ?? 12345),
                 dimension: dimension,
@@ -73,6 +74,7 @@ function DashboardPage() {
 
         const data = await res.json();
         setResult(data.structures);
+        console.log(data.structures);
     };
 
     return (
@@ -105,11 +107,11 @@ function DashboardPage() {
             <pre>{JSON.stringify(result, null, 2)}</pre>
         )} */}
             <div className="structures">
-                {result.map((structure, index) => (
+                {result.map((structures, index) => (
                     <div className="structure" key={index}>
-                        <p>{structure.structureType}</p>
-                        <p>X: {structure.x}</p>
-                        <p>Z: {structure.z}</p>
+                        <p>{structures.structureType}</p>
+                        <p>X: {structures.x}</p>
+                        <p>Z: {structures.z}</p>
                     </div>
                 ))}
             </div>

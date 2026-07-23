@@ -46,9 +46,31 @@ class StructureRequest(BaseModel):
     limit: int
     dimension: int
 
+# class StructureSearchRequest(BaseModel):
+#     seed: int
+#     structure: str
+#     limit: int
+#     dimension: int
+#     user_id: int
+
+# class StructureSearchResults(BaseModel):
+#     structureType: str
+#     x: int
+#     z: int
 
 @app.post("/structure-finder")
-async def structure_finder(request: StructureRequest):
+async def structure_finder(db: db_dependency, request: StructureRequest, user: user_dependency):
+
+    searched_structure = models.StructureSearch(
+        seed=request.seed,
+        structure=request.structure,
+        limit=request.limit,
+        dimension=request.dimension,
+        user_id=user["id"]
+    )
+    db.add(searched_structure)
+    db.commit()
+    db.refresh(searched_structure)
 
     generator = Generator(
         MCVersion.MC_1_21,
@@ -62,6 +84,16 @@ async def structure_finder(request: StructureRequest):
         request.limit
     )
 
+    found_structure = models.Structure(
+        structureType=request.structure,
+        x=closest_structure[0],
+        z=closest_structure[1],
+        search_id= searched_structure.id
+    )
+    db.add(found_structure)
+    db.commit()
+    db.refresh(found_structure)
+
     return {
         "structures": [
         {
@@ -71,6 +103,7 @@ async def structure_finder(request: StructureRequest):
         }
     ]
     }
+
 
 def parseStructure(structureStr: str):
     match structureStr:
