@@ -54,6 +54,21 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     token = create_access_token(user.username, user.id, timedelta(minutes=20))
     return {'access_token': token, 'token_type': 'bearer'}
 
+def verify_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise HTTPException(status_code = 403, detail="token invalid or expired")
+        return payload
+    except JWTError:
+        raise HTTPException(status_code = 403, detail="token invalid or expired")
+
+@router.get("/verify-token/{token}")
+async def verify_user_token(token: str):
+    verify_token(token)
+    return {"message": "token is valid"}
+
 def authenticate_user(username: str, password: str, db):
     user = db.query(Users).filter(Users.username == username).first()
     if not user:
@@ -78,3 +93,6 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         return {'username':username, 'id': user_id}
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user')
+
+def get_user_by_username(db: Session, username: str):
+    return db.query(Users).filter(Users.username == usernmae).first()

@@ -1,18 +1,7 @@
-export default async function Home(){
+"use client";
 
-const response = await fetch(
- "http:/backend:8000/"
-)
+import Login from "./Login";
 
-const data = await response.json()
-
-
-return (
- <main>
-  <h1>
-   {data.message}
-  </h1>
- </main>
-)
-
+export default function Page() {
+  return <Login />;
 }
