@@ -31,7 +31,8 @@ services:
 
     depends_on:
       - postgres
-
+    env_file:
+    - ./.env
 
   frontend:
     build:
