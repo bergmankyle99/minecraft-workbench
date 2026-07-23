@@ -165,3 +165,34 @@ def parseStructure(structureStr: str):
             return Structure.Trial_Chambers[0]
         case _:
             raise ValueError(f"Unknown structure: {structureStr}")
+
+@app.get("/search-history")
+async def get_search_history(db: db_dependency, user: user_dependency):
+    
+    searches = db.query(models.StructureSearch)\
+        .filter(
+            models.StructureSearch.user_id == user["id"]
+        ).order_by(models.StructureSearch.id.desc()).all()
+
+    results = []
+
+    for search in searches:
+
+        structure_list = []
+
+        for structure in search.structures:
+            structure_list.append({
+                "structureType": structure.structureType,
+                "x": structure.x,
+                "z": structure.z
+            })
+
+        results.append({
+            "id": search.id,
+            "seed": search.seed,
+            "structureType": search.structure,
+            "dimension": search.dimension,
+            "structures": structure_list
+        })
+
+    return results
