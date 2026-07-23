@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 function DashboardPage() {
     const [dimension, setDimension] = useState(0);
     const overworldStructures = [
-        "Feature",
         "Desert Pyramid",
         "Jungle Temple",
         "Jungle Pyramid",
