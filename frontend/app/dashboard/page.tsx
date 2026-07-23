@@ -3,6 +3,51 @@
 import { useEffect, useRef, useState } from "react";
 
 function DashboardPage() {
+    const [dimension, setDimension] = useState(0);
+    const overworldStructures = [
+        "Feature",
+        "Desert Pyramid",
+        "Jungle Temple",
+        "Jungle Pyramid",
+        "Swamp Hut",
+        "Igloo",
+        "Village",
+        "Ocean Ruin",
+        "Shipwreck",
+        "Monument",
+        "Mansion",
+        "Outpost",
+        "Ruined Portal",
+        "Ancient City",
+        "Treasure",
+        "Mineshaft",
+        "Desert Well",
+        "Geode",
+        "Trail Ruin",
+        "Trial Chambers"
+    ];
+
+    const netherStructures = [
+        "Fortress",
+        "Bastion",
+        "Ruined Portal"
+    ];
+
+    const endStructures = [
+        "End City",
+        "End Gateway",
+        "End Island"
+    ];
+    const getStructures = () => {
+        switch (dimension) {
+            case -1:
+                return netherStructures;
+            case 1:
+                return endStructures;
+            default:
+                return overworldStructures;
+        }
+    };
     type Structure = {
         structureType: number;
         x: number;
@@ -21,7 +66,7 @@ function DashboardPage() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 seed: Number(seedRef.current?.value ?? 12345),
-                dimension: Number(dimensionRef.current?.value ?? 0),
+                dimension: dimension,
                 structure: typeRef.current?.value ?? "Village",
                 limit: Number(limit.current?.value ?? 1000),
             }),
@@ -39,38 +84,18 @@ function DashboardPage() {
             <input ref={seedRef} placeholder="Seed" defaultValue={12345} />
             {/* <input ref={versionRef} placeholder="Version" defaultValue="22" /> */}
             {/* <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" /> */}
-            <select ref={dimensionRef} defaultValue={0}>
+            <select ref={dimensionRef} value={dimension}
+                onChange={(e) => setDimension(Number(e.target.value))}>
                 <option value="-1">Nether</option>
                 <option value="0">Overworld</option>
                 <option value="1">End</option>
             </select>
             <select ref={typeRef} defaultValue="Village">
-                <option value="Feature">Feature</option>
-                <option value="Desert Pyramid">Desert Pyramid</option>
-                <option value="Jungle Temple">Jungle Temple</option>
-                <option value="Jungle Pyramid">Jungle Pyramid</option>
-                <option value="Swamp Hut">Swamp Hut</option>
-                <option value="Igloo">Igloo</option>
-                <option value="Village">Village</option>
-                <option value="Ocean Ruin">Ocean Ruin</option>
-                <option value="Shipwreck">Shipwreck</option>
-                <option value="Monument">Monument</option>
-                <option value="Mansion">Mansion</option>
-                <option value="Outpost">Outpost</option>
-                <option value="Ruined Portal">Ruined Portal</option>
-                <option value="Ruined Portal N">Ruined Portal N</option>
-                <option value="Ancient City">Ancient City</option>
-                <option value="Treasure">Treasure</option>
-                <option value="Mineshaft">Mineshaft</option>
-                <option value="Desert Well">Desert Well</option>
-                <option value="Geode">Geode</option>
-                <option value="Fortress">Fortress</option>
-                <option value="Bastion">Bastion</option>
-                <option value="End City">End City</option>
-                <option value="End Gateway">End Gateway</option>
-                <option value="End Island">End Island</option>
-                <option value="Trail Ruin">Trail Ruin</option>
-                <option value="Trial Chambers">Trial Chambers</option>
+                {getStructures().map((structure) => (
+                    <option key={structure} value={structure}>
+                        {structure}
+                    </option>
+                ))}
             </select>
             <input ref={limit} placeholder="Limit" defaultValue={1000} />
 
