@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database import Base
 
-
+#create user model and relationships for users table, connected to searches 
 class Users(Base):
     __tablename__ = "users"
 
@@ -24,7 +24,7 @@ class Users(Base):
         cascade="all, delete"
     )
 
-
+#create structure search model for all structure searches, includes relationships with users table and structure table
 class StructureSearch(Base):
     __tablename__ = "structure_search"
 
@@ -49,7 +49,7 @@ class StructureSearch(Base):
         cascade="all, delete"
     )
 
-
+#create structure model for database, connected to search structured search table
 class Structure(Base):
     __tablename__ = "structure"
 

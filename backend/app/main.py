@@ -8,8 +8,11 @@ from app.auth import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
 from cubiomespi import Generator, MCVersion, Dimension, BiomeID, Structure
 from pydantic import BaseModel
+
+#fastapi initialization and entry point
 app = FastAPI()
 
+#add cors middleware to allow connecting to api via frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -19,17 +22,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+#include the auth route in main
 app.include_router(auth.router)
+#bind tables to the docker container and create tables from models
 models.Base.metadata.create_all(bind = engine)
 
+#get the database session, db dependency depends on this to run
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
+#uses get_db and session type to create connection in db_dependency
 db_dependency = Annotated[Session, Depends(get_db)]
+
+#create user dependency of the current user of type dict
 user_dependency = Annotated[dict, Depends(get_current_user)]
 @app.get("/", status_code = status.HTTP_200_OK)
 async def user(user: user_dependency, db: db_dependency):
@@ -37,16 +45,18 @@ async def user(user: user_dependency, db: db_dependency):
         raise HTTPException(status_code=401, detail="Auth Failed")
     return {"User": user}
 
-
+#Create sqlalchemy model for submitting to database
 class StructureRequest(BaseModel):
     seed: int
     structure: str
     limit: int
     dimension: int
 
+#structure finder route for finding structures in a given seed, area, and dimension
 @app.post("/structure-finder")
 async def structure_finder(db: db_dependency, request: StructureRequest, user: user_dependency):
 
+    #searched structure creates database entry from api call
     searched_structure = models.StructureSearch(
         seed=request.seed,
         structure=request.structure,
@@ -54,15 +64,20 @@ async def structure_finder(db: db_dependency, request: StructureRequest, user: u
         dimension=request.dimension,
         user_id=user["id"]
     )
+    #database insert
     db.add(searched_structure)
+    #database commit
     db.commit()
+    #refresh database
     db.refresh(searched_structure)
 
+    #cubiomespi generator creator, this is what generates the world to be searched
     generator = Generator(
         MCVersion.MC_1_21,
         request.seed,
         request.dimension
     )
+    #search for structures using generator and find closest structure, closest to zero zero
     closest_structure = generator.find_closest_structure(
         parseStructure(request.structure),
         0,
@@ -70,16 +85,21 @@ async def structure_finder(db: db_dependency, request: StructureRequest, user: u
         request.limit
     )
 
+    #put the found structure in a database model to be submitted
     found_structure = models.Structure(
         structureType=request.structure,
         x=closest_structure[0],
         z=closest_structure[1],
         search_id= searched_structure.id
     )
+    #submit to database (insert)
     db.add(found_structure)
+    #commit to database
     db.commit()
+    #refresh and update database
     db.refresh(found_structure)
 
+    #return structure found to frontend
     return {
         "structures": [
         {
@@ -90,7 +110,7 @@ async def structure_finder(db: db_dependency, request: StructureRequest, user: u
     ]
     }
 
-
+#parse structures based on their str value and return their enum
 def parseStructure(structureStr: str):
     match structureStr:
         case "Feature":
