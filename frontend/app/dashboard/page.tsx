@@ -12,7 +12,7 @@ function DashboardPage() {
     // refs (NO STATE FOR INPUTS)
     const seedRef = useRef<HTMLInputElement>(null);
     // const versionRef = useRef<HTMLInputElement>(null);
-    const typeRef = useRef<HTMLInputElement>(null);
+    const typeRef = useRef<HTMLSelectElement>(null);
     const limit = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<Structure[]>([]);
     const submit = async () => {
@@ -61,7 +61,35 @@ function DashboardPage() {
 
             <input ref={seedRef} placeholder="Seed" defaultValue={12345} />
             {/* <input ref={versionRef} placeholder="Version" defaultValue="22" /> */}
-            <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" />
+            {/* <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" /> */}
+            <select ref={typeRef} defaultValue="Village">
+                <option value="Feature">Feature</option>
+                <option value="Desert Pyramid">Desert Pyramid</option>
+                <option value="Jungle Temple">Jungle Temple</option>
+                <option value="Jungle Pyramid">Jungle Pyramid</option>
+                <option value="Swamp Hut">Swamp Hut</option>
+                <option value="Igloo">Igloo</option>
+                <option value="Village">Village</option>
+                <option value="Ocean Ruin">Ocean Ruin</option>
+                <option value="Shipwreck">Shipwreck</option>
+                <option value="Monument">Monument</option>
+                <option value="Mansion">Mansion</option>
+                <option value="Outpost">Outpost</option>
+                <option value="Ruined Portal">Ruined Portal</option>
+                <option value="Ruined Portal N">Ruined Portal N</option>
+                <option value="Ancient City">Ancient City</option>
+                <option value="Treasure">Treasure</option>
+                <option value="Mineshaft">Mineshaft</option>
+                <option value="Desert Well">Desert Well</option>
+                <option value="Geode">Geode</option>
+                <option value="Fortress">Fortress</option>
+                <option value="Bastion">Bastion</option>
+                <option value="End City">End City</option>
+                <option value="End Gateway">End Gateway</option>
+                <option value="End Island">End Island</option>
+                <option value="Trail Ruin">Trail Ruin</option>
+                <option value="Trial Chambers">Trial Chambers</option>
+            </select>
             <input ref={limit} placeholder="Limit" defaultValue={1000} />
 
             <button onClick={submit}>Find</button>
