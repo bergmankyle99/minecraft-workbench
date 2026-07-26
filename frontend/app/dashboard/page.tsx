@@ -53,6 +53,19 @@ function DashboardPage() {
         z: number;
     };
     const token = localStorage.getItem("token");
+    const [history, setHistory] = useState<any[]>([]);
+    async function loadHistory(){
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:8000/search-history",
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        const data = await res.json();
+        setHistory(data);
+    }
     // refs (NO STATE FOR INPUTS)
     const seedRef = useRef<HTMLInputElement>(null);
     // const versionRef = useRef<HTMLInputElement>(null);
@@ -75,7 +88,9 @@ function DashboardPage() {
 
         const data = await res.json();
         setResult(data.structures);
+        loadHistory();
     };
+
     return (
         <div>
             {/* STRUCTURE FINDER */}
@@ -110,7 +125,26 @@ function DashboardPage() {
                     </div>
                 ))}
             </div>
-        </div>
+            {history.map((search)=>(
+                <div key={search.id}>
+                    <h3>
+                        {search.structureType}
+                    </h3>
+
+                    <p>
+                        Seed: {search.seed}
+                    </p>
+
+                    {search.structures.map((structure:any)=>(
+                        <div key={structure.x}>
+                            X: {structure.x}
+                            Z: {structure.z}
+                        </div>
+                    ))}
+
+                </div>
+                ))}
+            </div>
     );
 }
 export default DashboardPage
