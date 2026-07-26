@@ -60,6 +60,7 @@ function DashboardPage() {
     const dimensionRef = useRef<HTMLSelectElement>(null);
     const limit = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<Structure[]>([]);
+    const [historyResult, setHistoryResult] = useState<Structure[]>([]);
     const submit = async () => {
         const res = await fetch("http://localhost:8000/structure-finder", {
             method: "POST",
@@ -75,7 +76,6 @@ function DashboardPage() {
         const data = await res.json();
         setResult(data.structures);
     };
-
     return (
         <div>
             {/* STRUCTURE FINDER */}
