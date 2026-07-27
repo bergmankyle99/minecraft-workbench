@@ -90,7 +90,63 @@ function DashboardPage() {
         setResult(data.structures);
         loadHistory();
     };
-
+    const vals = 
+        [
+        {
+            "structureType": "Village",
+            "x": 250,
+            "z": 370
+        }
+    ]
+    const fakeHistory = [
+    {
+        id: 1,
+        seed: 123456789,
+        structureType: "Village",
+        dimension: 0,
+        structures: [
+            {
+                structureType: "Village",
+                x: 250,
+                z: 370
+            },
+        ]
+    },
+    {
+        id: 2,
+        seed: 987654321,
+        structureType: "Ancient City",
+        dimension: 0,
+        structures: [
+            {
+                structureType: "Ancient City",
+                x: -340,
+                z: 900
+            },
+        ]
+    },
+    {
+        id: 3,
+        seed: 55555555,
+        structureType: "Fortress",
+        dimension: -1,
+        structures: [
+            {
+                structureType: "Fortress",
+                x: 120,
+                z: -450
+            }
+        ]
+    }
+];
+function dimensionParse(dimension: Number){
+    switch(dimension){
+        case -1: return "Nether";
+        case 0: return "Overworld";
+        case 1: return "End";
+        default: return "Overworld";
+    }
+}
     return (
         <div>
             {/* STRUCTURE FINDER */}
@@ -132,28 +188,35 @@ function DashboardPage() {
             </div>
             
             <div className="body-output">
+                <br></br>
                 <div className="structures">
-                    {result.map((structures, index) => (
+                    {vals.map((structures, index) => (
                         <div className="structure" key={index}>
-                            <p>Structure Type: {structures.structureType}</p>
+                            <p className="structureType">{structures.structureType}</p>
                             <p>Seed: {seedRef.current?.value}</p>
-                            <p>X: {structures.x}</p>
-                            <p>Z: {structures.z}</p>
+                            <p>Dimension: {dimensionParse(dimension)}</p>
+                            <p>X: {structures.x}, Z: {structures.z}</p>
                         </div>
                     ))}
                 </div>
+                <br></br>
+                <br></br>
                 <div className="history">
-                    {history.map((search)=>(
-                        <div key={search.id}>
+                    <h3 className="historyTitle">History</h3>
+                    {fakeHistory.map((search)=>(
+                        <div className="historyItem" key={search.id}>
                             <h3>
                                 {search.structureType}
                             </h3>
                             <p>
                                 Seed: {search.seed}
                             </p>
+                            <p>
+                                Dimension: {dimensionParse(search.dimension)}
+                            </p>
                             {search.structures.map((structure:any)=>(
                                 <div key={structure.x}>
-                                    X: {structure.x}
+                                    X: {structure.x}, 
                                     Z: {structure.z}
                                 </div>
                             ))}

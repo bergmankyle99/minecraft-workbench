@@ -126,3 +126,29 @@ h2{
   border-radius: 5px;
   font-family: "MinecraftFont", sans-serif;
 }
+
+.body-output {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-left: 5px;
+}
+.structureType {
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 3em;
+}
+.historyTitle {
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 2em;
+}
+.historyItem {
+  border: 2px solid black;
+  width: 25%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.historyItem h3 {
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 1.5em;
+}
