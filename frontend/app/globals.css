@@ -184,11 +184,16 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  justify-content: center; /* centers vertically */
+  height: 100vh;
+
+  background-image: url("/background.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .logMCLogo{
   width: 15%;
-  margin:auto;
 }
 .logsign-form {
   display: flex;
@@ -201,9 +206,9 @@ body{
 }
 .login-title{
   font-family: "MinecraftFont", sans-serif;
-  margin: auto;
   text-align: center;
   font-size: 5em;
+  color: white;
 }
 .login-form{
   border-radius: 5px 0px 0px 5px;
@@ -247,4 +252,8 @@ body{
 
 .signup-form > button:hover {
   background-color:chartreuse;
+}
+.login-text{
+  font-family: "MinecraftFont", sans-serif;
+  color: white;
 }

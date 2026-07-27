@@ -101,8 +101,13 @@ function Login() {
         <div className="logsign-page">
             <img className="logMCLogo" src={mclogo.src}></img>
             <h1 className="login-title">MINECRAFT WORKBENCH</h1>
+            <p className="login-text">Minecraft Workbench is a Minecraft utility for analyzing seeds.</p>
+            <br></br>
             <div className="logsign-form">
+                
                 <form className="login-form" onSubmit={handleSubmit}>
+                    <h2>Log-in</h2>
+                    <br></br>
                     <div>
                         <label>Username</label>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -116,7 +121,10 @@ function Login() {
                     </button>
                     {error &&  <div><br></br><p style={{ color: 'red' }}>{error}</p></div>}
                 </form>
+                
                 <form className="signup-form" onSubmit={handleRegisterSubmit}>
+                    <h2>Sign-up</h2>
+                    <br></br>
                     <div>
                         <label>Username </label>
                         <input type="text" value={registerUsername} onChange={(e) => setRegUsername(e.target.value)} />
