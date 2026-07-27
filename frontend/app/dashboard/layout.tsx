@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import "../globals.css";
+import mclogo from "../../public/mc-logo.png"
 export default function DashboardLayout({
     children,
 }: {
@@ -14,7 +15,7 @@ export default function DashboardLayout({
             const token = localStorage.getItem('token');
             console.log(token);
             if (!token) {
-                router.push("/");
+                router.push("/dashboard");
                 return;
             }
             try {
@@ -25,24 +26,42 @@ export default function DashboardLayout({
                 setLoading(false);
             } catch (error) {
                 localStorage.removeItem('token');
-                router.replace("/");;
+                router.replace("/dashboard");;
             }
         }
         verifyToken();
     }, [router]);
 
-    if (loading) {
-        return <div>Loading...</div>;
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
+
+    function logout (){
+        localStorage.removeItem("token");
+        router.replace("/");
     }
     return (
 
         <div>
             { }
-            <nav>
-                Minecraft Workbench
-            </nav>
-
-            {children}
+            <div className="top-bar">
+                <img src={mclogo.src}></img>
+                <h1>MINECRAFT WORKBENCH</h1>
+            </div>
+            <div className="body">
+                <div className="side-bar">
+                    <ul className="side-nav">
+                        <li>Structure Finder</li> 
+                    </ul>
+                    <ul className="side-logout">
+                        <li onClick={logout}>Logout</li>
+                    </ul>
+                </div>
+                <div className="main">
+                    {children}
+                </div> 
+            </div>
+            
         </div>
     );
 }

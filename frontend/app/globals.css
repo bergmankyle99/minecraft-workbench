@@ -1,5 +1,10 @@
 @import "tailwindcss";
-
+@font-face {
+    font-family: "MinecraftFont";
+    src: url("../public/Minecraft.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +28,101 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.top-bar {
+  width: 100%;
+  height: 10vh;
+  background-color:silver;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+.top-bar img {
+  width: 5%;
+}
+.top-bar h1 {
+  font-family: "MinecraftFont", sans-serif;
+  font-size: x-large;
+}
+.body {
+  height: 90vh;
+  background-color: aqua;
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar{
+  padding: 5px;
+  padding-top: 10px;
+  height: 100%;
+  width: 15%;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid black;
+}
+.side-logout {
+  margin-top: auto;;
+}
+.side-nav li{
+  text-align: center;
+  align-content: center;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 5%;
+  margin-bottom: 10px;
+  font-size: x-large;
+  font-family: "MinecraftFont", sans-serif;
+}
+
+.side-logout li{
+  text-align: center;
+  align-content: center;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 5%;
+  margin-bottom: 10px;
+  font-size: x-large;
+  font-family: "MinecraftFont", sans-serif;
+}
+.side-bar li:hover{
+  background-color: chartreuse;
+}
+.side-bar li:active{
+  background-color:darkorange;
+}
+.main{
+  padding: 20px;
+  width: 100%;
+}
+
+h2{
+  font-family: "MinecraftFont", sans-serif;
+  font-size: x-large;
+}
+.find-structures-form{
+  width: fit-content;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content:start;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+.find-structures-form div {
+  padding-right: 50px;
+}
+.find-structures-form > div > input, select{
+  background-color: blue;
+}
+.find-structures-button {
+  background-color:hotpink;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  font-family: "MinecraftFont", sans-serif;
 }
