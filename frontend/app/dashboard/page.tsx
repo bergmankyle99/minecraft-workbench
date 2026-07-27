@@ -52,7 +52,22 @@ function DashboardPage() {
         x: number;
         z: number;
     };
-    const [history, setHistory] = useState<any[]>([]);
+    const defaultHistory = [{
+
+    
+        id: 1,
+        seed: 123456789,
+        structureType: "Village",
+        dimension: 0,
+        structures: [
+            {
+                structureType: "Village",
+                x: 250,
+                z: 370
+            },
+        ]
+}];
+    const [history, setHistory] = useState<any[]>(defaultHistory);
     async function loadHistory(){
         const token = localStorage.getItem("token");
         const res = await fetch("http://localhost:8000/search-history",
@@ -65,6 +80,9 @@ function DashboardPage() {
         const data = await res.json();
         setHistory(data);
     }
+    useEffect(() => {
+        loadHistory();
+    }, []);
     // refs (NO STATE FOR INPUTS)
     const seedRef = useRef<HTMLInputElement>(null);
     // const versionRef = useRef<HTMLInputElement>(null);
@@ -137,6 +155,32 @@ function DashboardPage() {
                 z: -450
             }
         ]
+    },
+    {
+        id: 4,
+        seed: 55555555,
+        structureType: "Fortress",
+        dimension: -1,
+        structures: [
+            {
+                structureType: "Fortress",
+                x: 120,
+                z: -450
+            }
+        ]
+    },
+    {
+        id: 5,
+        seed: 55555555,
+        structureType: "Fortress",
+        dimension: -1,
+        structures: [
+            {
+                structureType: "Fortress",
+                x: 120,
+                z: -450
+            }
+        ]
     }
 ];
 function dimensionParse(dimension: Number){
@@ -190,7 +234,7 @@ function dimensionParse(dimension: Number){
             <div className="body-output">
                 <br></br>
                 <div className="structures">
-                    {vals.map((structures, index) => (
+                    {result.map((structures, index) => (
                         <div className="structure" key={index}>
                             <p className="structureType">{structures.structureType}</p>
                             <p>Seed: {seedRef.current?.value}</p>
@@ -201,9 +245,10 @@ function dimensionParse(dimension: Number){
                 </div>
                 <br></br>
                 <br></br>
+                <h3 className="historyTitle">History</h3>
                 <div className="history">
-                    <h3 className="historyTitle">History</h3>
-                    {fakeHistory.map((search)=>(
+                    
+                    {history.map((search)=>(
                         <div className="historyItem" key={search.id}>
                             <h3>
                                 {search.structureType}

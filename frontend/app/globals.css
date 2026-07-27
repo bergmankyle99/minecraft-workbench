@@ -38,6 +38,7 @@ body {
   flex-direction: row;
   align-items: center;
   border-bottom: 2px solid black;
+  
 }
 .top-bar img {
   width: 5%;
@@ -48,7 +49,7 @@ body {
 }
 .body {
   height: 90vh;
-  background-color: aqua;
+  background-color:white;
   display: flex;
   flex-direction: row;
 }
@@ -58,10 +59,9 @@ body {
   padding-top: 10px;
   height: 100%;
   width: 15%;
-  background-color: red;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  border-right: 2px solid black;
 }
 .side-logout {
   margin-top: auto;;
@@ -74,6 +74,8 @@ body {
   border-radius: 5%;
   margin-bottom: 10px;
   font-size: x-large;
+ 
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
   font-family: "MinecraftFont", sans-serif;
 }
 
@@ -86,6 +88,8 @@ body {
   margin-bottom: 10px;
   font-size: x-large;
   font-family: "MinecraftFont", sans-serif;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+
 }
 .side-bar li:hover{
   background-color: chartreuse;
@@ -96,6 +100,7 @@ body {
 .main{
   padding: 20px;
   width: 100%;
+  padding-left: 50px;
 }
 
 h2{
@@ -104,34 +109,40 @@ h2{
 }
 .find-structures-form{
   width: fit-content;
-  background-color: red;
+  background-color:goldenrod;
   display: flex;
   flex-direction: row;
   justify-content:start;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px;
+
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
 }
 .find-structures-form div {
   padding-right: 50px;
 }
 .find-structures-form > div > input, select{
-  background-color: blue;
+  background-color: white;
 }
 .find-structures-button {
-  background-color:hotpink;
+  background-color:white;
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 5px;
   font-family: "MinecraftFont", sans-serif;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
 }
-
+.find-structures-button:hover {
+  background-color:chartreuse;
+}
 .body-output {
   display: flex;
   flex-direction: column;
   margin-top: 25px;
   margin-left: 5px;
+  height: calc(90vh - 15vh);
 }
 .structureType {
   font-family: "MinecraftFont", sans-serif;
@@ -147,8 +158,93 @@ h2{
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+  background-color:darkgray;
+  color: white;
 }
 .historyItem h3 {
   font-family: "MinecraftFont", sans-serif;
   font-size: 1.5em;
+}
+.history {
+  overflow-y: auto;
+  flex: 1;
+}
+body{
+  overflow-y: hidden;
+}
+.body{
+  height: 90vh;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.logsign-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+.logMCLogo{
+  width: 15%;
+  margin:auto;
+}
+.logsign-form {
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+  
+  font-family: "MinecraftFont", sans-serif;
+
+}
+.login-title{
+  font-family: "MinecraftFont", sans-serif;
+  margin: auto;
+  text-align: center;
+  font-size: 5em;
+}
+.login-form{
+  border-radius: 5px 0px 0px 5px;
+  padding: 50px;
+  background-color: goldenrod;
+}
+.signup-form{
+  border-radius: 0px 5px 5px 0px;
+  padding: 50px;
+  background-color: silver;
+}
+.login-form button {
+  background-color:white;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  font-family: "MinecraftFont", sans-serif;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+}
+
+.logsign-form input {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+.login-form > button:hover {
+  background-color:chartreuse;
+}
+.signup-form button {
+  background-color:white;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  font-family: "MinecraftFont", sans-serif;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+}
+
+.signup-form > button:hover {
+  background-color:chartreuse;
 }

@@ -15,7 +15,7 @@ export default function DashboardLayout({
             const token = localStorage.getItem('token');
             console.log(token);
             if (!token) {
-                router.push("/dashboard");
+                router.push("/");
                 return;
             }
             try {
@@ -26,15 +26,15 @@ export default function DashboardLayout({
                 setLoading(false);
             } catch (error) {
                 localStorage.removeItem('token');
-                router.replace("/dashboard");;
+                router.replace("/");;
             }
         }
         verifyToken();
     }, [router]);
 
-    // if (loading) {
-    //     return <div>Loading...</div>;
-    // }
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     function logout (){
         localStorage.removeItem("token");

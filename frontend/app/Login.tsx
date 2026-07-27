@@ -2,7 +2,7 @@
 import { resolveNaptr } from "dns";
 import React, { use, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import mclogo from "../public/mc-logo.png";
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -98,36 +98,42 @@ function Login() {
 
     };
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
-                </button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
-            <form onSubmit={handleRegisterSubmit}>
-                <div>
-                    <label>Username</label>
-                    <input type="text" value={registerUsername} onChange={(e) => setRegUsername(e.target.value)} />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="text" value={registerPassword} onChange={(e) => setRegPassword(e.target.value)} />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Signing up..." : "Sign Up"}
-                </button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
+        <div className="logsign-page">
+            <img className="logMCLogo" src={mclogo.src}></img>
+            <h1 className="login-title">MINECRAFT WORKBENCH</h1>
+            <div className="logsign-form">
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <div>
+                        <label>Username</label>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <button type="submit" disabled={loading}>
+                        {loading ? "Logging in..." : "Login"}
+                    </button>
+                    {error &&  <div><br></br><p style={{ color: 'red' }}>{error}</p></div>}
+                </form>
+                <form className="signup-form" onSubmit={handleRegisterSubmit}>
+                    <div>
+                        <label>Username </label>
+                        <input type="text" value={registerUsername} onChange={(e) => setRegUsername(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" value={registerPassword} onChange={(e) => setRegPassword(e.target.value)} />
+                    </div>
+                    <button type="submit" disabled={loading}>
+                        {loading ? "Signing up..." : "Sign Up"}
+                    </button>
+                   
+                    {error &&  <div><br></br><p style={{ color: 'red' }}>{error}</p></div>}
+                </form>
+            </div>
         </div>
+        
     );
 
 }
