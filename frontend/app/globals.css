@@ -257,3 +257,211 @@ body{
   font-family: "MinecraftFont", sans-serif;
   color: white;
 }
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 1024px) {
+
+    .side-bar {
+        width: 20%;
+    }
+
+    .main {
+        padding-left: 25px;
+    }
+
+    .find-structures-form {
+        flex-wrap: wrap;
+    }
+
+    .historyItem {
+        width: 50%;
+    }
+
+    .login-title {
+        font-size: 4em;
+    }
+
+    .logsign-form {
+        width: 80%;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    /* Dashboard */
+
+    .body {
+        flex-direction: column;
+    }
+
+
+    .side-bar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+
+    .side-nav,
+    .side-logout {
+        display: flex;
+        gap: 10px;
+    }
+
+
+    .side-logout {
+        margin-top: 0;
+    }
+
+
+    .side-nav li,
+    .side-logout li {
+        width: 100px;
+        font-size: medium;
+    }
+
+
+    .main {
+        padding: 15px;
+    }
+
+
+    .find-structures-form {
+        width: 100%;
+        flex-direction: column;
+    }
+
+
+    .find-structures-form div {
+        padding-right: 0;
+    }
+
+    .find-structures-button {
+      margin-top: 5px;
+    }
+
+    .historyItem {
+        width: 100%;
+    }
+
+
+    /* Login */
+
+    .logsign-page {
+        padding: 20px;
+    }
+
+
+    .login-title {
+        font-size: 3em;
+    }
+
+
+    .logMCLogo {
+        width: 30%;
+    }
+
+
+    .logsign-form {
+        width: 95%;
+        flex-direction: column;
+    }
+
+
+    .login-form,
+    .signup-form {
+        padding: 30px;
+    }
+
+
+    .login-form {
+        border-radius: 5px 5px 0 0;
+    }
+
+
+    .signup-form {
+        border-radius: 0 0 5px 5px;
+    }
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .body {
+        height: auto;
+        min-height: 90vh;
+        overflow: visible;
+    }
+
+    .main {
+        overflow: visible;
+    }
+
+    .body-output {
+        height: auto;
+    }
+
+    .history {
+        overflow-y: visible;
+    }
+    .top-bar img {
+      width: 15%;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 480px) {
+
+
+    .top-bar h1 {
+        font-size: large;
+    }
+
+
+    .side-bar {
+        flex-direction: column;
+    }
+
+
+    .side-nav,
+    .side-logout {
+        width: 100%;
+        flex-direction: column;
+    }
+
+
+    .side-nav li,
+    .side-logout li {
+        width: 100%;
+    }
+
+
+    .login-title {
+        font-size: 2em;
+    }
+
+
+    .logMCLogo {
+        width: 40%;
+    }
+
+
+    .login-form,
+    .signup-form {
+        padding: 20px;
+    }
+
+}
