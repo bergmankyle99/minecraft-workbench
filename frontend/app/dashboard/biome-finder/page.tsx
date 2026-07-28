@@ -201,7 +201,7 @@ function BiomeFinderPage() {
                         >
 
 
-                            <p className="structureType">
+                            <p className="structureType2">
                                 {biome.biome}
                             </p>
 

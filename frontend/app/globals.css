@@ -148,6 +148,10 @@ h2{
   font-family: "MinecraftFont", sans-serif;
   font-size: 3em;
 }
+.structureType2 {
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 3em;
+}
 .historyTitle {
   font-family: "MinecraftFont", sans-serif;
   font-size: 2em;
@@ -288,7 +292,9 @@ body{
     .historyItem {
         width: 50%;
     }
-
+    .historyItem2 {
+        width: 50%;
+    }
     .login-title {
         font-size: 4em;
     }
@@ -318,7 +324,10 @@ body{
         flex-direction: row;
         justify-content: space-between;
     }
-
+    .structureType2 {
+      font-family: "MinecraftFont", sans-serif;
+      font-size: 1em;
+    }
 
     .side-nav,
     .side-logout {
@@ -361,7 +370,9 @@ body{
     .historyItem {
         width: 100%;
     }
-
+    .historyItem2 {
+        width: 100%;
+    }
 
     /* Login */
 
