@@ -1,4 +1,3 @@
-````md
 <h1 align="center">
   🟩 Minecraft Workbench
 </h1>
@@ -423,4 +422,4 @@ This project demonstrates experience with:
 - Computational libraries
 
 Minecraft Workbench transforms Minecraft seed analysis into a modern web application.
-````
+
