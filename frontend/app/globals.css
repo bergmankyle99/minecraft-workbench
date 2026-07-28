@@ -162,6 +162,16 @@ h2{
   background-color:darkgray;
   color: white;
 }
+.historyItem2 {
+  border: 2px solid black;
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
+  background-color:darkgray;
+  color: white;
+}
 .historyItem h3 {
   font-family: "MinecraftFont", sans-serif;
   font-size: 1.5em;
@@ -464,4 +474,31 @@ body{
         padding: 20px;
     }
 
+}
+
+.spinner-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 5px solid #ccc;
+    border-top: 5px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

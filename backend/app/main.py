@@ -6,7 +6,7 @@ from app import models
 from app import auth
 from app.auth import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
-from cubiomespi import Generator, MCVersion, Dimension, BiomeID, Structure
+from cubiomespi import Generator, MCVersion, Dimension, BiomeID, Structure, get_biome_at
 from pydantic import BaseModel
 
 #fastapi initialization and entry point, fastapi instance
@@ -17,6 +17,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://minecraftworkbench.ca",
+        "http://localhost:3000"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -196,3 +197,116 @@ async def get_search_history(db: db_dependency, user: user_dependency):
         })
 
     return results
+
+
+class BiomeSearchRequest(BaseModel):
+    seed: int
+    x: int = 0
+    z: int = 0
+    radius: int = 1000
+    version: int = 3100  # change to your Minecraft version
+
+def biome_to_string(biome_id):
+    return f"minecraft:{BiomeID(biome_id).name.lower()}"
+
+@app.post("/biome-finder")
+def find_biomes(request: BiomeSearchRequest):
+    print(list(BiomeID))
+    generator = Generator(
+        MCVersion.MC_1_21,
+        request.seed,
+        0
+    )
+
+    found = {}
+
+    step = 8
+
+    for bx in range(
+        request.x - request.radius,
+        request.x + request.radius,
+        step
+    ):
+        for bz in range(
+            request.z - request.radius,
+            request.z + request.radius,
+            step
+        ):
+
+            biome = get_biome_at(
+                generator,
+                bx,
+                63,
+                bz
+            )
+
+            try:
+                biome_name =  biome_to_string(biome)
+            except ValueError:
+                continue
+
+
+            if biome_name not in found:
+                found[biome_name] = []
+
+
+            found[biome_name].append({
+                "x": bx,
+                "z": bz
+            })
+
+
+    # Calculate center location of each biome
+    biomes = []
+
+    for biome_name, locations in found.items():
+
+        closest = min(
+            locations,
+            key=lambda loc: (
+                (loc["x"] - request.x) ** 2 +
+                (loc["z"] - request.z) ** 2
+            )
+        )
+
+
+        center_x = closest["x"]
+        center_z = closest["z"]
+
+
+        biomes.append({
+            "biome": biome_name,
+            "x": center_x,
+            "z": center_z,
+            "samples": len(locations)
+        })
+
+
+    return {
+        "seed": request.seed,
+        "biomes": biomes
+    }
+
+
+@app.get("/test-biome")
+def test_biome():
+
+    seed = 12345
+
+    generator = Generator(
+        MCVersion.MC_1_21,
+        seed,
+        0
+    )
+
+    biome = get_biome_at(
+        generator,
+        -212,
+        63,
+        -29
+    )
+
+    return {
+        "id": biome,
+        "name": biome_to_string(biome)
+    }

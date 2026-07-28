@@ -51,7 +51,10 @@ export default function DashboardLayout({
             <div className="body">
                 <div className="side-bar">
                     <ul className="side-nav">
-                        <li>Structure Finder</li> 
+                        <li onClick={() => router.push("/dashboard")}>Structure Finder</li> 
+                    </ul>
+                    <ul className="side-nav">
+                        <li onClick={() => router.push("/dashboard/biome-finder")}>Biome Finder</li> 
                     </ul>
                     <ul className="side-logout">
                         <li onClick={logout}>Logout</li>
