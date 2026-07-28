@@ -208,7 +208,7 @@ function BiomeFinderPage() {
 
 
                             <p>
-                                Center Location:
+                                Approximate Location:
                             </p>
 
 
