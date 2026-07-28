@@ -249,11 +249,13 @@ function DashboardPage() {
                     <input min="1" max="100000" type="number" name="limit" ref={limit} placeholder="Limit" defaultValue={1000} />
                 </div>
 
-                <button className="find-structures-button" onClick={submit}>Find Structures</button>
-                <MinecraftButton
-                    text={"Find Structures"}
-                    onClick={submit}
-                />
+                <div className="find-structures-button">
+                    <MinecraftButton
+                        text={"Find Structures"}
+                        onClick={submit}
+                    />
+                </div>
+
             </div>
 
             <div className="body-output">
