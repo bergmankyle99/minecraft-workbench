@@ -234,15 +234,7 @@ body{
   padding: 50px;
   background-color: silver;
 }
-.login-form button {
-  background-color:white;
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
-  font-family: "MinecraftFont", sans-serif;
-  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
-}
+
 
 .logsign-form input {
   margin-left: 10px;
@@ -251,22 +243,7 @@ body{
   border-radius: 5px;
   background-color: white;
 }
-.login-form > button:hover {
-  background-color:chartreuse;
-}
-.signup-form button {
-  background-color:white;
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
-  font-family: "MinecraftFont", sans-serif;
-  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
-}
 
-.signup-form > button:hover {
-  background-color:chartreuse;
-}
 .login-text{
   font-family: "MinecraftFont", sans-serif;
   color: white;
