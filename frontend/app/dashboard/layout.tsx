@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import "../globals.css";
 import mclogo from "../../public/mc-logo.png"
+import MinecraftButton from "../components/MinecraftButton";
 export default function DashboardLayout({
     children,
 }: {
@@ -54,7 +55,7 @@ export default function DashboardLayout({
                         <li onClick={() => router.push("/dashboard")}>Structure Finder</li> 
                     </ul>
                     <ul className="side-nav">
-                        <li onClick={() => router.push("/dashboard/biome-finder")}>Biome Finder</li> 
+                        <li onClick={() => router.push("/dashboard/biome-finder")}><MinecraftButton text={"Biome Finder"}></MinecraftButton></li> 
                     </ul>
                     <ul className="side-logout">
                         <li onClick={logout}>Logout</li>
