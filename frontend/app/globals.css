@@ -122,6 +122,7 @@ h2{
 .find-structures-form div {
   padding-right: 50px;
 }
+
 .find-structures-form > div > input, select{
   background-color: white;
 }
@@ -317,7 +318,10 @@ body{
         margin-top: 0;
     }
 
-
+    .find-structures-form button {
+      padding-top: 5px;
+    }
+    
     .side-nav li,
     .side-logout li {
         width: 100px;
