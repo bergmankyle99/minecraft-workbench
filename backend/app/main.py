@@ -16,7 +16,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://3.144.161.65:3000",
+        "https://minecraftworkbench.ca",
     ],
     allow_credentials=True,
     allow_methods=["*"],

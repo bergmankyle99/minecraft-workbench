@@ -38,7 +38,7 @@ function Login() {
         formDetails.append('password', password);
 
         try {
-            const response = await fetch("http://3.144.161.65:8000/auth/token", {
+            const response = await fetch("/auth/token", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,7 +70,7 @@ function Login() {
         formDetails.append('password', registerPassword);
 
         try {
-            const response = await fetch("http://3.144.161.65:8000/auth/", {
+            const response = await fetch("/auth/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

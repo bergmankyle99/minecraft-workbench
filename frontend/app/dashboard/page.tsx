@@ -70,7 +70,7 @@ function DashboardPage() {
     const [history, setHistory] = useState<any[]>(defaultHistory);
     async function loadHistory() {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://3.144.161.65:8000/search-history",
+        const res = await fetch("/search-history",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -113,7 +113,7 @@ function DashboardPage() {
             alert("Range must be greater than 0");
             return;
         }
-        const res = await fetch("http://3.144.161.65:8000/structure-finder", {
+        const res = await fetch("/structure-finder", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, },
             body: JSON.stringify({
