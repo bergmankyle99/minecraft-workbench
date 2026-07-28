@@ -209,7 +209,7 @@ class BiomeSearchRequest(BaseModel):
 def biome_to_string(biome_id):
     return f"minecraft:{BiomeID(biome_id).name.lower()}"
 
-@app.post("/biome-finder")
+@app.post("/biome-finder1")
 def find_biomes(request: BiomeSearchRequest):
     print(list(BiomeID))
     generator = Generator(
