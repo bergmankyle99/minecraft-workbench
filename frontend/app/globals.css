@@ -319,9 +319,9 @@ body{
     }
 
     .find-structures-form button {
-      padding-top: 5px;
+      margin-top: 5px;
     }
-    
+
     .side-nav li,
     .side-logout li {
         width: 100px;
