@@ -79,7 +79,7 @@ body {
   font-family: "MinecraftFont", sans-serif;
 }
 
-.side-logout li{
+/* .side-logout li{
   text-align: center;
   align-content: center;
   height: 50px;
@@ -90,7 +90,7 @@ body {
   font-family: "MinecraftFont", sans-serif;
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.20);
 
-}
+} */
 .side-bar li:hover{
   background-color: chartreuse;
 }
@@ -515,7 +515,7 @@ body{
 }
 .mc-button {
     height: 45px;
-    width: 300px;
+    width: 100%;
 
     cursor: pointer;
     overflow: hidden;
