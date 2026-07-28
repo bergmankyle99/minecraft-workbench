@@ -1,17 +1,40 @@
 ````md
-# Minecraft Workbench
+<h1 align="center">
+  🟩 Minecraft Workbench
+</h1>
 
-A full-stack Minecraft seed analysis and world exploration platform built to help players discover structures, biomes, and world information from Minecraft seeds.
+<p align="center">
+  A full-stack Minecraft seed analysis and world exploration platform for discovering structures, biomes, and world information from Minecraft seeds.
+</p>
 
-Minecraft Workbench uses the **Cubiomes library through cubiomespi** to efficiently analyze Minecraft world generation, with a modern web stack consisting of **FastAPI, Next.js, PostgreSQL, Docker, and AWS deployment**.
+<p align="center">
+  Built with FastAPI, Next.js, PostgreSQL, Docker, AWS, and Cubiomes.
+</p>
 
 ---
 
-# Features
+## 🚀 Overview
 
-## Structure Finder
+Minecraft Workbench is a full-stack web application that allows users to analyze Minecraft world generation using seeds.
 
-Find Minecraft structures based on:
+The application uses **Cubiomes through cubiomespi** to calculate Minecraft structures and biome information without requiring a Minecraft world save file.
+
+The goal of this project is to combine Minecraft world generation research with real-world software engineering practices, including:
+
+- Full-stack development
+- REST API design
+- Database architecture
+- Authentication systems
+- Containerization
+- Cloud deployment
+
+---
+
+# ✨ Features
+
+## 🔎 Structure Finder
+
+Search Minecraft worlds for structures using:
 
 - World seed
 - Structure type
@@ -31,7 +54,7 @@ Supported structures include:
 - End Cities
 - And many more
 
-Results include:
+Returns:
 
 - Structure type
 - X/Z coordinates
@@ -39,32 +62,32 @@ Results include:
 
 ---
 
-## Biome Finder
+## 🌎 Biome Finder
 
-Analyze Minecraft world regions and discover nearby biomes.
+Analyze Minecraft terrain generation and discover nearby biomes.
 
 Features:
 
-- Search around custom X/Z coordinates
+- Search using custom X/Z coordinates
 - Adjustable search radius
 - Detect multiple biome types
 - Return biome locations
-- Count biome samples found
+- Track biome sample counts
 
 ---
 
-## User Authentication
+## 🔐 Authentication
 
-Includes:
+Minecraft Workbench includes a complete authentication system:
 
 - User registration
 - JWT authentication
-- Protected API routes
+- Protected API endpoints
 - User-specific search history
 
 ---
 
-## Search History
+## 📜 Search History
 
 Users can view previous searches including:
 
@@ -72,11 +95,11 @@ Users can view previous searches including:
 - Structures found
 - Coordinates
 - Dimensions
-- Search timestamps
+- Search results
 
 ---
 
-# Tech Stack
+# 🛠 Technology Stack
 
 ## Frontend
 
@@ -85,22 +108,22 @@ Users can view previous searches including:
 Used for:
 
 - User interface
+- Client-side interactions
 - Form handling
 - API communication
-- Client-side interactions
-- Responsive design
+- Responsive layouts
 
 ---
 
 ## Backend
 
-### FastAPI (Python)
+### FastAPI + Python
 
 Used for:
 
 - REST API development
 - Authentication
-- Minecraft world calculations
+- Minecraft calculations
 - Request validation
 - Database communication
 
@@ -114,7 +137,7 @@ Libraries:
 
 ---
 
-## Minecraft World Generation
+## Minecraft Generation
 
 ### cubiomespi
 
@@ -126,7 +149,7 @@ Used for:
 - Biome lookup
 - Seed analysis
 
-Cubiomes allows Minecraft world information to be calculated without loading an actual Minecraft world.
+Cubiomes allows Minecraft world information to be calculated without loading a Minecraft save file.
 
 ---
 
@@ -136,7 +159,7 @@ Cubiomes allows Minecraft world information to be calculated without loading an 
 
 Stores:
 
-- Users
+- User accounts
 - Structure searches
 - Found structures
 - Search history
@@ -147,33 +170,29 @@ ORM:
 
 ---
 
-# Infrastructure
-
-## Docker
-
-The application is containerized using Docker Compose.
-
-Services:
+# 🏗 Architecture
 
 ```
-minecraft-frontend
-    |
-    Next.js application
-
-
-minecraft-api
-    |
-    FastAPI backend
-
-
-minecraft-postgres
-    |
-    PostgreSQL database
+                         User
+                           |
+                           |
+              minecraftworkbench.ca
+                           |
+                        Nginx
+                       /     \
+                      /       \
+                 Next.js     FastAPI
+                    |            |
+                    |        cubiomespi
+                    |            |
+                    |   Minecraft Generation
+                    |
+                PostgreSQL
 ```
 
 ---
 
-## AWS Deployment
+# ☁️ Deployment
 
 Minecraft Workbench is deployed using AWS infrastructure.
 
@@ -181,35 +200,32 @@ Current deployment includes:
 
 - AWS EC2
 - Docker containers
+- Docker Compose
 - Nginx reverse proxy
 - HTTPS with Certbot
 - PostgreSQL database
 
----
-
-# Architecture
+Application services:
 
 ```
-                    User
-                      |
-                      |
-          minecraftworkbench.ca
-                      |
-                   Nginx
-                  /     \
-                 /       \
-            Next.js     FastAPI
-               |           |
-               |       cubiomespi
-               |           |
-               |    Minecraft Generation
-               |
-          PostgreSQL
+minecraft-frontend
+        |
+        Next.js
+
+
+minecraft-api
+        |
+        FastAPI
+
+
+minecraft-postgres
+        |
+        PostgreSQL
 ```
 
 ---
 
-# API Endpoints
+# 🔌 API Overview
 
 ## Authentication
 
@@ -311,7 +327,7 @@ Returns previous searches for the authenticated user.
 
 ---
 
-# Running Locally
+# 💻 Running Locally
 
 ## Requirements
 
@@ -378,34 +394,33 @@ http://localhost:8000/docs
 
 ---
 
-# Future Improvements
+# 🔮 Future Improvements
 
 Planned features:
 
 - Interactive Minecraft world map
 - Structure and biome visualization
 - Chunk-based map rendering
-- Support for more Minecraft versions
-- Improved biome searching algorithms
+- Support for additional Minecraft versions
 - Redis background workers
 - AWS S3 storage for generated maps
 - More advanced world analysis tools
 
 ---
 
-# Project Goals
+# 🎯 Project Purpose
 
-Minecraft Workbench was created to combine Minecraft world generation research with real-world software engineering practices.
+Minecraft Workbench was created to explore Minecraft world generation while applying real-world software engineering concepts.
 
-The project demonstrates:
+This project demonstrates experience with:
 
 - Full-stack application development
-- REST API design
-- Database architecture
+- REST API architecture
+- Database design
 - Authentication systems
-- Containerization
+- Docker containerization
 - Cloud deployment
-- Working with computationally intensive libraries
+- Computational libraries
 
 Minecraft Workbench transforms Minecraft seed analysis into a modern web application.
 ````
