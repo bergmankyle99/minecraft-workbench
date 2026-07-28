@@ -54,6 +54,7 @@ export default function DashboardLayout({
                     <ul className="">
                         <li onClick={() => router.push("/dashboard")}><MinecraftButton text={"Structure Finder"} ></MinecraftButton></li> 
                     </ul>
+                    <br></br>
                     <ul className="">
                         <li onClick={() => router.push("/dashboard/biome-finder")}><MinecraftButton text={"Biome Finder"}></MinecraftButton></li> 
                     </ul>
