@@ -54,7 +54,7 @@ function DashboardPage() {
     };
     const defaultHistory = [{
 
-    
+
         id: 1,
         seed: 123456789,
         structureType: "Village",
@@ -66,13 +66,13 @@ function DashboardPage() {
                 z: 370
             },
         ]
-}];
+    }];
     const [history, setHistory] = useState<any[]>(defaultHistory);
-    async function loadHistory(){
+    async function loadHistory() {
         const token = localStorage.getItem("token");
         const res = await fetch("http://3.144.161.65:8000/search-history",
             {
-                headers:{
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
@@ -93,6 +93,26 @@ function DashboardPage() {
     const [historyResult, setHistoryResult] = useState<Structure[]>([]);
     const submit = async () => {
         const token = localStorage.getItem("token");
+        const seedValue = seedRef.current?.value;
+        const limitValue = limit.current?.value;
+
+        const seed = Number(seedValue);
+        const range = Number(limitValue);
+
+        if (!seedValue || Number.isNaN(seed)) {
+            alert("Please enter a valid seed number");
+            return;
+        }
+
+        if (!limitValue || Number.isNaN(range)) {
+            alert("Please enter a valid range number");
+            return;
+        }
+
+        if (range <= 0) {
+            alert("Range must be greater than 0");
+            return;
+        }
         const res = await fetch("http://3.144.161.65:8000/structure-finder", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, },
@@ -108,89 +128,89 @@ function DashboardPage() {
         setResult(data.structures);
         loadHistory();
     };
-    const vals = 
+    const vals =
         [
-        {
-            "structureType": "Village",
-            "x": 250,
-            "z": 370
-        }
-    ]
+            {
+                "structureType": "Village",
+                "x": 250,
+                "z": 370
+            }
+        ]
     const fakeHistory = [
-    {
-        id: 1,
-        seed: 123456789,
-        structureType: "Village",
-        dimension: 0,
-        structures: [
-            {
-                structureType: "Village",
-                x: 250,
-                z: 370
-            },
-        ]
-    },
-    {
-        id: 2,
-        seed: 987654321,
-        structureType: "Ancient City",
-        dimension: 0,
-        structures: [
-            {
-                structureType: "Ancient City",
-                x: -340,
-                z: 900
-            },
-        ]
-    },
-    {
-        id: 3,
-        seed: 55555555,
-        structureType: "Fortress",
-        dimension: -1,
-        structures: [
-            {
-                structureType: "Fortress",
-                x: 120,
-                z: -450
-            }
-        ]
-    },
-    {
-        id: 4,
-        seed: 55555555,
-        structureType: "Fortress",
-        dimension: -1,
-        structures: [
-            {
-                structureType: "Fortress",
-                x: 120,
-                z: -450
-            }
-        ]
-    },
-    {
-        id: 5,
-        seed: 55555555,
-        structureType: "Fortress",
-        dimension: -1,
-        structures: [
-            {
-                structureType: "Fortress",
-                x: 120,
-                z: -450
-            }
-        ]
+        {
+            id: 1,
+            seed: 123456789,
+            structureType: "Village",
+            dimension: 0,
+            structures: [
+                {
+                    structureType: "Village",
+                    x: 250,
+                    z: 370
+                },
+            ]
+        },
+        {
+            id: 2,
+            seed: 987654321,
+            structureType: "Ancient City",
+            dimension: 0,
+            structures: [
+                {
+                    structureType: "Ancient City",
+                    x: -340,
+                    z: 900
+                },
+            ]
+        },
+        {
+            id: 3,
+            seed: 55555555,
+            structureType: "Fortress",
+            dimension: -1,
+            structures: [
+                {
+                    structureType: "Fortress",
+                    x: 120,
+                    z: -450
+                }
+            ]
+        },
+        {
+            id: 4,
+            seed: 55555555,
+            structureType: "Fortress",
+            dimension: -1,
+            structures: [
+                {
+                    structureType: "Fortress",
+                    x: 120,
+                    z: -450
+                }
+            ]
+        },
+        {
+            id: 5,
+            seed: 55555555,
+            structureType: "Fortress",
+            dimension: -1,
+            structures: [
+                {
+                    structureType: "Fortress",
+                    x: 120,
+                    z: -450
+                }
+            ]
+        }
+    ];
+    function dimensionParse(dimension: Number) {
+        switch (dimension) {
+            case -1: return "Nether";
+            case 0: return "Overworld";
+            case 1: return "End";
+            default: return "Overworld";
+        }
     }
-];
-function dimensionParse(dimension: Number){
-    switch(dimension){
-        case -1: return "Nether";
-        case 0: return "Overworld";
-        case 1: return "End";
-        default: return "Overworld";
-    }
-}
     return (
         <div>
             {/* STRUCTURE FINDER */}
@@ -198,9 +218,9 @@ function dimensionParse(dimension: Number){
             <div className="find-structures-form">
                 <div>
                     <label htmlFor="seed">Seed</label><br></br>
-                    <input name="seed" ref={seedRef} placeholder="Seed" defaultValue={12345} />
+                    <input type="number" name="seed" ref={seedRef} placeholder="Seed" defaultValue={12345} />
                 </div>
-               
+
                 {/* <input ref={versionRef} placeholder="Version" defaultValue="22" /> */}
                 {/* <input ref={typeRef} placeholder="Structure Type" defaultValue="Village" /> */}
                 <div>
@@ -212,7 +232,7 @@ function dimensionParse(dimension: Number){
                         <option value="1">End</option>
                     </select>
                 </div>
-                
+
                 <div>
                     <label htmlFor="structure">Structure Type</label><br></br>
                     <select name="structure" ref={typeRef} defaultValue="Village">
@@ -225,12 +245,12 @@ function dimensionParse(dimension: Number){
                 </div>
                 <div>
                     <label htmlFor="limit">Range</label><br></br>
-                    <input name="limit" ref={limit} placeholder="Limit" defaultValue={1000} />
+                    <input min="1" max="100000" type="number" name="limit" ref={limit} placeholder="Limit" defaultValue={1000} />
                 </div>
-                
+
                 <button className="find-structures-button" onClick={submit}>Find Structures</button>
             </div>
-            
+
             <div className="body-output">
                 <br></br>
                 <div className="structures">
@@ -247,8 +267,8 @@ function dimensionParse(dimension: Number){
                 <br></br>
                 <h3 className="historyTitle">History</h3>
                 <div className="history">
-                    
-                    {history.map((search)=>(
+
+                    {history.map((search) => (
                         <div className="historyItem" key={search.id}>
                             <h3>
                                 {search.structureType}
@@ -259,19 +279,19 @@ function dimensionParse(dimension: Number){
                             <p>
                                 Dimension: {dimensionParse(search.dimension)}
                             </p>
-                            {search.structures.map((structure:any)=>(
+                            {search.structures.map((structure: any) => (
                                 <div key={structure.x}>
-                                    X: {structure.x}, 
+                                    X: {structure.x},
                                     Z: {structure.z}
                                 </div>
                             ))}
                         </div>
                     ))}
                 </div>
-                
-                </div>
+
             </div>
-            
+        </div>
+
     );
 }
 export default DashboardPage
