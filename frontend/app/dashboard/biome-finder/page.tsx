@@ -50,7 +50,7 @@ function BiomeFinderPage() {
     try {
 
         const res = await fetch(
-            "/api/biome-finder1",
+            "/biome-finder1",
             {
                 method: "POST",
 
