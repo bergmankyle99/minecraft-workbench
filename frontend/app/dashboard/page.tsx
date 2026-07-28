@@ -250,7 +250,7 @@ function DashboardPage() {
                 </div>
 
                 <MinecraftButton
-                    text={"Find Structures"}
+                    text={" Find Structures "}
                     onClick={submit}
                 />
 
