@@ -1,16 +1,15 @@
 FROM node:22
 
-
 WORKDIR /app
 
+COPY package*.json ./
 
-COPY package*.json .
-
-
-RUN npm install
-
+RUN npm ci
 
 COPY . .
 
+RUN npm run build
 
-CMD ["npm","run","dev"]
+EXPOSE 3000
+
+CMD ["npm", "start"]

@@ -19,7 +19,7 @@ export default function DashboardLayout({
                 return;
             }
             try {
-                const response = await fetch(`http://localhost:8000/auth/verify-token/${token}`)
+                const response = await fetch(`http://3.144.161.65:8000/auth/verify-token/${token}`)
                 if (!response.ok) {
                     throw Error('Token verification failed');
                 }

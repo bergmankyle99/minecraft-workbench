@@ -38,7 +38,7 @@ function Login() {
         formDetails.append('password', password);
 
         try {
-            const response = await fetch("http://localhost:8000/auth/token", {
+            const response = await fetch("http://3.144.161.65:8000/auth/token", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,7 +70,7 @@ function Login() {
         formDetails.append('password', registerPassword);
 
         try {
-            const response = await fetch("http://localhost:8000/auth/", {
+            const response = await fetch("http://3.144.161.65:8000/auth/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ function Login() {
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <button type="submit" disabled={loading}>
                         {loading ? "Logging in..." : "Login"}
@@ -131,7 +131,7 @@ function Login() {
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="text" value={registerPassword} onChange={(e) => setRegPassword(e.target.value)} />
+                        <input type="password" value={registerPassword} onChange={(e) => setRegPassword(e.target.value)} />
                     </div>
                     <button type="submit" disabled={loading}>
                         {loading ? "Signing up..." : "Sign Up"}
