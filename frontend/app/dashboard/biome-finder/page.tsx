@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import "../../globals.css";
+import MinecraftButton from "@/app/components/MinecraftButton";
 
 function BiomeFinderPage() {
 
@@ -26,73 +27,73 @@ function BiomeFinderPage() {
 
     async function submit() {
 
-    const seedValue = seedRef.current?.value;
-    const radiusValue = radiusRef.current?.value;
+        const seedValue = seedRef.current?.value;
+        const radiusValue = radiusRef.current?.value;
 
-    const seed = Number(seedValue);
-    const radius = Number(radiusValue);
+        const seed = Number(seedValue);
+        const radius = Number(radiusValue);
 
 
-    if (!seedValue || Number.isNaN(seed)) {
-        alert("Please enter a valid seed number");
-        return;
+        if (!seedValue || Number.isNaN(seed)) {
+            alert("Please enter a valid seed number");
+            return;
+        }
+
+
+        if (!radiusValue || Number.isNaN(radius)) {
+            alert("Please enter a valid radius");
+            return;
+        }
+
+
+        setLoading(true);
+
+        try {
+
+            const res = await fetch(
+                "/biome-finder1",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        seed: seed,
+
+                        x: Number(
+                            xRef.current?.value ?? 0
+                        ),
+
+                        z: Number(
+                            zRef.current?.value ?? 0
+                        ),
+
+                        radius: radius,
+
+                        version: 3100
+                    })
+                }
+            );
+
+
+            const data = await res.json();
+
+            setSeedResult(data.seed);
+            setResult(data.biomes);
+
+        } catch (error) {
+
+            console.error(error);
+            alert("Failed to find biomes");
+
+        } finally {
+
+            setLoading(false);
+
+        }
     }
-
-
-    if (!radiusValue || Number.isNaN(radius)) {
-        alert("Please enter a valid radius");
-        return;
-    }
-
-
-    setLoading(true);
-
-    try {
-
-        const res = await fetch(
-            "/biome-finder1",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    seed: seed,
-
-                    x: Number(
-                        xRef.current?.value ?? 0
-                    ),
-
-                    z: Number(
-                        zRef.current?.value ?? 0
-                    ),
-
-                    radius: radius,
-
-                    version: 3100
-                })
-            }
-        );
-
-
-        const data = await res.json();
-
-        setSeedResult(data.seed);
-        setResult(data.biomes);
-
-    } catch (error) {
-
-        console.error(error);
-        alert("Failed to find biomes");
-
-    } finally {
-
-        setLoading(false);
-
-    }
-}
 
 
     return (
@@ -162,16 +163,11 @@ function BiomeFinderPage() {
 
                 </div>
 
-
-
-                <button
-                    className="find-structures-button"
+                <MinecraftButton
+                    text={loading ? "Searching..." : "Find Biomes"}
                     onClick={submit}
                     disabled={loading}
-                >
-                    {loading ? "Searching..." : "Find Biomes"}
-                </button>
-
+                />
 
             </div>
 

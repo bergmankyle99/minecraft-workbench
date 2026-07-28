@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import "../globals.css";
+import MinecraftButton from "../components/MinecraftButton";
 function DashboardPage() {
     const [dimension, setDimension] = useState(0);
     const overworldStructures = [
@@ -249,6 +250,10 @@ function DashboardPage() {
                 </div>
 
                 <button className="find-structures-button" onClick={submit}>Find Structures</button>
+                <MinecraftButton
+                    text={"Find Structures"}
+                    onClick={submit}
+                />
             </div>
 
             <div className="body-output">
