@@ -154,6 +154,7 @@ h2{
   font-size: 1em;
 }
 .historyTitle {
+  color: white;
   font-family: "MinecraftFont", sans-serif;
   font-size: 2em;
 }
@@ -602,4 +603,7 @@ body{
     transform: translateY(-2px);
 
     transition: 0.1s;
+}
+.body {
+  background-image: url("../public/stonewall.jpg");
 }
