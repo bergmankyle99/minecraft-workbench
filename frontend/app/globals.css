@@ -568,3 +568,31 @@ body{
 .mc-ul {
   margin-bottom: 10px;
 }
+
+.history-card {
+    width: 320px;
+    min-height: 90px;
+
+    padding: 14px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    background: #8b8b8b;
+
+    border-top: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
+    border-right: 3px solid #373737;
+    border-bottom: 3px solid #373737;
+
+    box-shadow:
+        inset 3px 3px #c6c6c6,
+        inset -3px -3px #555555;
+
+    font-family: "MinecraftFont", sans-serif;
+    color: white;
+    text-shadow: 2px 2px #000;
+
+    image-rendering: pixelated;
+}
