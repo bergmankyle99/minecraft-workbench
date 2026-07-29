@@ -55,6 +55,7 @@ body {
 }
 .structure p {
   color: white;
+  font-family: "MinecraftFont", sans-serif;
 }
 .side-bar{
   padding: 5px;
