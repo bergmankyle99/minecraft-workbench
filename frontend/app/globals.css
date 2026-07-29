@@ -609,19 +609,29 @@ body{
 
     transition: 0.1s;
 }
+body {
+  overflow-x: hidden;
+}
+
+.top-bar,
+.body {
+  position: relative;
+  z-index: 1;
+}
 .bg-image {
-  /* The image used */
   background-image: url("../public/stonewall.jpg");
-
-  /* Add the blur effect */
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  position: fixed;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  z-index: -1;
 }
