@@ -145,7 +145,7 @@ h2{
   flex-direction: column;
   margin-top: 25px;
   margin-left: 5px;
-  height: calc(90vh - 18vh);
+  height: calc(90vh - 17vh);
 }
 .structureType {
   font-family: "MinecraftFont", sans-serif;
@@ -611,4 +611,9 @@ body{
 }
 .body {
   background-image: url("../public/stonewall.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
 }
