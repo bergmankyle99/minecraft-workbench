@@ -271,10 +271,10 @@ function DashboardPage() {
                 <br></br>
                 <br></br>
                 <h3 className="historyTitle">History</h3>
-                <div className="history-card">
+                <div className="history">
 
                     {history.map((search) => (
-                        <div className="historyItem" key={search.id}>
+                        <div className="history-card" key={search.id}>
                             <h3>
                                 {search.structureType}
                             </h3>
