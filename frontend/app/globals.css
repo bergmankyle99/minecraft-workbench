@@ -609,25 +609,19 @@ body{
 
     transition: 0.1s;
 }
-/* .body {
+.bg-image {
+  /* The image used */
   background-image: url("../public/stonewall.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-.body img {
+
+  /* Add the blur effect */
   filter: blur(8px);
   -webkit-filter: blur(8px);
-} */
- .body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../public/stonewall.jpg");
-  background-repeat: no-repeat;
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(8px);
-  transform: scale(1.05); /* prevents blurred edges showing */
-  z-index: -1;
 }

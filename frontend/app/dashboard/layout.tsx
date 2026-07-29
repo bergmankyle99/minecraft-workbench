@@ -49,6 +49,7 @@ export default function DashboardLayout({
                 <img src={mclogo.src}></img>
                 <h1>MINECRAFT WORKBENCH</h1>
             </div>
+            <div className="bg-image"></div>
             <div className="body">
                 <div className="side-bar">
                     <ul className="mc-ul">
