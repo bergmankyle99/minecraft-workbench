@@ -258,7 +258,7 @@ function DashboardPage() {
 
             <div className="body-output">
                 <br></br>
-                <div className="structures">
+                <div className="history-card">
                     {result.map((structures, index) => (
                         <div className="structure" key={index}>
                             <p className="structureType">{structures.structureType}</p>
