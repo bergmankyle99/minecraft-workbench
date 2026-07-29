@@ -609,7 +609,7 @@ body{
 
     transition: 0.1s;
 }
-.body {
+/* .body {
   background-image: url("../public/stonewall.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -618,4 +618,16 @@ body{
 .body img {
   filter: blur(8px);
   -webkit-filter: blur(8px);
+} */
+ body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../public/stonewall.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(8px);
+  transform: scale(1.05); /* prevents blurred edges showing */
+  z-index: -1;
 }
