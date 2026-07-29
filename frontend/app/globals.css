@@ -253,6 +253,7 @@ body{
 .login-text{
   font-family: "MinecraftFont", sans-serif;
   color: white;
+  text-align: center;
 }
 /* =========================
    TABLETS
