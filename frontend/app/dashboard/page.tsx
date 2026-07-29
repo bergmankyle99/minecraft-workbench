@@ -215,7 +215,7 @@ function DashboardPage() {
     return (
         <div>
             {/* STRUCTURE FINDER */}
-            < h2 > Find Structures</h2 >
+            < h2 className="find-structures-title"> Find Structures</h2 >
             <div className="find-structures-form">
                 <div>
                     <label htmlFor="seed">Seed</label><br></br>

@@ -59,7 +59,6 @@ body {
   padding-top: 10px;
   height: 100%;
   width: 15%;
-  background-color: white;
   display: flex;
   flex-direction: column;
 }
@@ -152,6 +151,9 @@ h2{
 .structureType2 {
   font-family: "MinecraftFont", sans-serif;
   font-size: 1em;
+}
+.find-structures-title {
+  color: white;
 }
 .historyTitle {
   color: white;

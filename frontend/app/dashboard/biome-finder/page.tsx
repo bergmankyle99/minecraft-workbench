@@ -100,7 +100,7 @@ function BiomeFinderPage() {
 
         <div>
 
-            <h2>Find Biomes</h2>
+            <h2 className="find-structures-title">Find Biomes</h2>
 
 
 
