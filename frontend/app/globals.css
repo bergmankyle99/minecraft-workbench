@@ -596,3 +596,10 @@ body{
 
     image-rendering: pixelated;
 }
+.history-card:hover {
+    background: #979797;
+
+    transform: translateY(-2px);
+
+    transition: 0.1s;
+}
