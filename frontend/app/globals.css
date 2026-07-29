@@ -53,7 +53,9 @@ body {
   display: flex;
   flex-direction: row;
 }
-
+.structure p {
+  color: white;
+}
 .side-bar{
   padding: 5px;
   padding-top: 10px;
