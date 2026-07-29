@@ -196,7 +196,6 @@ body{
 }
 .body{
   height: 90vh;
-  background-color: white;
   display: flex;
   flex-direction: row;
   overflow: hidden;
