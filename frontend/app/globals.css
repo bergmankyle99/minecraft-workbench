@@ -145,7 +145,7 @@ h2{
   flex-direction: column;
   margin-top: 25px;
   margin-left: 5px;
-  height: calc(90vh - 15vh);
+  height: calc(90vh - 18vh);
 }
 .structureType {
   font-family: "MinecraftFont", sans-serif;
