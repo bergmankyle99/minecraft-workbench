@@ -192,7 +192,7 @@ function BiomeFinderPage() {
                     {result.map((biome, index) => (
 
                         <div
-                            className="historyItem2"
+                            className="history-card"
                             key={index}
                         >
 
