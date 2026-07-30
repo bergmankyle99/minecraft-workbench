@@ -249,6 +249,76 @@ h2{
 
     transition: 0.1s;
 }
+.seed-history-card {
+    width: 320px;
+    min-height: 90px;
+    height: fit-content;
+    padding: 14px;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    place-items: center;
+    overflow: hidden;
+    background: #8b8b8b;
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid #373737;
+    border-bottom: 3px solid #373737;
+
+    box-shadow:
+        inset 3px 3px #c6c6c6,
+        inset -3px -3px #555;
+
+    font-family: "MinecraftFont", sans-serif;
+    color: white;
+    text-shadow: 2px 2px #000;
+}
+.seed-history-card p {
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.seed-history-card:hover {
+    background: #979797;
+
+    transform: translateY(-2px);
+
+    transition: 0.1s;
+}
+/* .search-history-card {
+    width: 320px;
+    min-height: 90px;
+    height: fit-content;
+    padding: 14px;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    place-items: center;
+    overflow: hidden;
+    background: #8b8b8b;
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid #373737;
+    border-bottom: 3px solid #373737;
+
+    box-shadow:
+        inset 3px 3px #c6c6c6,
+        inset -3px -3px #555;
+
+    font-family: "MinecraftFont", sans-serif;
+    color: white;
+    text-shadow: 2px 2px #000;
+}
+.search-history-card p {
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.search-history-card:hover {
+    background: #979797;
+
+    transform: translateY(-2px);
+
+    transition: 0.1s;
+} */
 body{
   overflow-y: hidden;
 }
