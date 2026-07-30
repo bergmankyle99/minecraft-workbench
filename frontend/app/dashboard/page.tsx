@@ -268,8 +268,7 @@ function DashboardPage() {
                         </div>
                     ))}
                 </div>
-                <br></br>
-                <br></br>
+             
                 <h3 className="historyTitle">History</h3>
                 <div className="history">
 
