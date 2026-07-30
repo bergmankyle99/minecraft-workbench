@@ -263,10 +263,11 @@ def find_biomes(request: BiomeSearchRequest):
                 continue
 
             # #if that biome hasnt been found yet, add an empty location in our found dict
-            if biome_name not in found:
-                found[biome_name] = []
+            # if biome_name not in found:
+            #     found[biome_name] = []
+            found[biome_name] = []
 
-            # append all biome locations at location corresponding to biome name
+            # append biome location at location corresponding to biome name
             found[biome_name].append({
                 "x": bx,
                 "z": bz
@@ -277,15 +278,27 @@ def find_biomes(request: BiomeSearchRequest):
     biomes = []
     #for each biome and its location in found
     for biome_name, locations in found.items():
+        #get the closest to the middle of the biome
+        closest = min(
+            locations,
+            #For every location, calculate a distance score.
+            #"Look through every structure I found and return the
+            #one whose X/Z coordinates are mathematically closest to where the player searched."
+            key=lambda loc: (
+                (loc["x"] - request.x) ** 2 +
+                (loc["z"] - request.z) ** 2
+            )
+        )
 
-        #find center of biome instead of closest part to the starting x z
-        center_x = sum(loc["x"] for loc in locations) / len(locations)
-        center_z = sum(loc["z"] for loc in locations) / len(locations)
+        #take center x and z from the closest search
+        center_x = closest["x"]
+        center_z = closest["z"]
 
+        #append biome at x , z, and how many samples to biomes dict list
         biomes.append({
             "biome": biome_name,
-            "x": round(center_x),
-            "z": round(center_z),
+            "x": center_x,
+            "z": center_z,
             "samples": len(locations)
         })
 
@@ -294,4 +307,5 @@ def find_biomes(request: BiomeSearchRequest):
         "seed": request.seed,
         "biomes": biomes
     }
+
 
