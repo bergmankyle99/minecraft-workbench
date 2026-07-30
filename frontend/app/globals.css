@@ -141,11 +141,10 @@ h2{
   background-color:chartreuse;
 }
 .body-output {
-  display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-  margin-left: 5px;
-  height: calc(90vh - 17vh);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
 }
 .structureType {
   font-family: "MinecraftFont", sans-serif;
@@ -188,8 +187,12 @@ h2{
   font-size: 1.5em;
 }
 .history {
-  overflow-y: auto;
-  flex: 1;
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 320px);
+    gap: 15px;
+    overflow-y: auto;
 }
 body{
   overflow-y: hidden;
@@ -417,9 +420,7 @@ body{
         height: auto;
     }
 
-    .history {
-        overflow-y: visible;
-    }
+    
     .top-bar img {
       width: 15%;
     }
@@ -578,7 +579,7 @@ body{
 .history-card {
     width: 320px;
     min-height: 90px;
-
+    flex-shrink: 0;
     padding: 14px;
 
     display: flex;
