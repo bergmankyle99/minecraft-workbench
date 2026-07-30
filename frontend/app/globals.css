@@ -595,13 +595,11 @@ body{
     width: 320px;
     min-height: 90px;
     height: fit-content;
-
     padding: 14px;
-
+    margin-bottom: 30px;
     box-sizing: border-box;
 
     overflow: hidden;
-
     background: #8b8b8b;
 
     border-top: 3px solid white;
