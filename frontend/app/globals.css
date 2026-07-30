@@ -593,12 +593,12 @@ body{
 
 .history-card {
     width: 320px;
-    min-height: 90px;
+    min-height: 320px;
     height: fit-content;
     padding: 14px;
     margin-bottom: 40px;
     box-sizing: border-box;
-
+    place-items: center;
     overflow: hidden;
     background: #8b8b8b;
 
