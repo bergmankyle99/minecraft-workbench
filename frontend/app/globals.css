@@ -194,7 +194,8 @@ h2{
     display: grid;
     grid-template-columns: repeat(auto-fill, 320px);
     gap: 12px;
-
+    width: fit-content;
+    max-width: 100%;
     padding: 15px;
 
     background: #c6c6c6;
@@ -591,28 +592,36 @@ body{
 }
 
 .history-card {
-    width: 320px;
-    min-height: 90px;
+    width: 160px;
+    min-height: 100px;
+    height: auto;
 
     padding: 14px;
 
+    box-sizing: border-box;
+
+    overflow: hidden;
+
     background: #8b8b8b;
 
-    border-top: 3px solid #ffffff;
-    border-left: 3px solid #ffffff;
+    border-top: 3px solid white;
+    border-left: 3px solid white;
     border-right: 3px solid #373737;
     border-bottom: 3px solid #373737;
 
     box-shadow:
         inset 3px 3px #c6c6c6,
-        inset -3px -3px #555555;
+        inset -3px -3px #555;
 
     font-family: "MinecraftFont", sans-serif;
     color: white;
     text-shadow: 2px 2px #000;
-
-    image-rendering: pixelated;
 }
+.history-card p {
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
 .history-card:hover {
     background: #979797;
 
