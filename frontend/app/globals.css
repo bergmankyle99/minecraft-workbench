@@ -635,3 +635,41 @@ body {
 
   z-index: -1;
 }
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: #6d6d6d;
+    border: 2px solid #2d2d2d;
+    box-shadow:
+        inset -2px -2px 0 #4d4d4d,
+        inset 2px 2px 0 #8d8d8d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        to right,
+        #bcbcbc 0%,
+        #9d9d9d 50%,
+        #7f7f7f 100%
+    );
+    border: 2px solid #2d2d2d;
+    box-shadow:
+        inset -2px -2px 0 #6b6b6b,
+        inset 2px 2px 0 #d0d0d0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        to right,
+        #d4d4d4 0%,
+        #b5b5b5 50%,
+        #969696 100%
+    );
+}
+
+::-webkit-scrollbar-corner {
+    background: #4a4a4a;
+}
