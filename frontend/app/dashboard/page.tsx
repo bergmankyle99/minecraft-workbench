@@ -5,6 +5,7 @@ import "../globals.css";
 import MinecraftButton from "../components/MinecraftButton";
 function DashboardPage() {
     const [dimension, setDimension] = useState(0);
+    //overworld structures list
     const overworldStructures = [
         "Desert Pyramid",
         "Jungle Temple",
@@ -26,19 +27,22 @@ function DashboardPage() {
         "Trail Ruin",
         "Trial Chambers"
     ];
-
+    //nether structures list
     const netherStructures = [
         "Fortress",
         "Bastion",
         "Ruined Portal"
     ];
-
+    //end structures list
     const endStructures = [
         "End City",
         "End Gateway",
         "End Island"
     ];
+    //convert structures integer to the structure list corresponding to that dimension
     const getStructures = () => {
+        //based on dimension global (set via the dimension selector), return list of structures to be mapped to 
+        //select and options
         switch (dimension) {
             case -1:
                 return netherStructures;
@@ -48,6 +52,7 @@ function DashboardPage() {
                 return overworldStructures;
         }
     };
+    //Structure has a number and x and z
     type Structure = {
         structureType: number;
         x: number;
@@ -69,6 +74,7 @@ function DashboardPage() {
         ]
     }];
     const [history, setHistory] = useState<any[]>(defaultHistory);
+    //load history, fetch post request to search history by passing in token
     async function loadHistory() {
         const token = localStorage.getItem("token");
         const res = await fetch("/search-history",
@@ -78,20 +84,22 @@ function DashboardPage() {
                 }
             }
         );
+        //if good result set history with data
         const data = await res.json();
         setHistory(data);
     }
+    //on page load, get history
     useEffect(() => {
         loadHistory();
     }, []);
     // refs (NO STATE FOR INPUTS)
     const seedRef = useRef<HTMLInputElement>(null);
-    // const versionRef = useRef<HTMLInputElement>(null);
     const typeRef = useRef<HTMLSelectElement>(null);
     const dimensionRef = useRef<HTMLSelectElement>(null);
     const limit = useRef<HTMLInputElement>(null);
     const [result, setResult] = useState<Structure[]>([]);
     const [historyResult, setHistoryResult] = useState<Structure[]>([]);
+    //submit structure search form
     const submit = async () => {
         const token = localStorage.getItem("token");
         const seedValue = seedRef.current?.value;
@@ -100,20 +108,22 @@ function DashboardPage() {
         const seed = Number(seedValue);
         const range = Number(limitValue);
 
+        //input validation, if seed value is empty or doesnt exist, throw error
         if (!seedValue || Number.isNaN(seed)) {
             alert("Please enter a valid seed number");
             return;
         }
-
+        // same as above for limit
         if (!limitValue || Number.isNaN(range)) {
             alert("Please enter a valid range number");
             return;
         }
-
+        //if range is less than or equal to 0 throw error
         if (range <= 0) {
             alert("Range must be greater than 0");
             return;
         }
+        //fetch strucure finder via post request, with token in header, and form data
         const res = await fetch("/structure-finder", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, },
@@ -124,11 +134,12 @@ function DashboardPage() {
                 limit: Number(limit.current?.value ?? 1000),
             }),
         });
-
+        //if good set the result to be the structure found and update the history list
         const data = await res.json();
         setResult(data.structures);
         loadHistory();
     };
+    //test values
     const vals =
         [
             {
@@ -204,6 +215,8 @@ function DashboardPage() {
             ]
         }
     ];
+
+    //parse a integer to the dimension string
     function dimensionParse(dimension: Number) {
         switch (dimension) {
             case -1: return "Nether";
@@ -227,6 +240,7 @@ function DashboardPage() {
                 <div>
                     <label htmlFor="dimension">Dimension</label><br></br>
                     <select name="dimension" ref={dimensionRef} value={dimension}
+                        //on change update the structure list to match the selected dimension
                         onChange={(e) => setDimension(Number(e.target.value))}>
                         <option value="-1">Nether</option>
                         <option value="0">Overworld</option>
@@ -237,6 +251,7 @@ function DashboardPage() {
                 <div>
                     <label htmlFor="structure">Structure Type</label><br></br>
                     <select name="structure" ref={typeRef} defaultValue="Village">
+                        {/* get structures correct structures and map them to options */}
                         {getStructures().map((structure) => (
                             <option key={structure} value={structure}>
                                 {structure}
@@ -259,6 +274,7 @@ function DashboardPage() {
             <div className="body-output">
                 <br></br>
                 <div className="seed-history-card">
+                    {/* map structures (only 1) to seed, dimension, x, z */}
                     {result.map((structures, index) => (
                         <div className="structure" key={index}>
                             <p className="structureType">{structures.structureType}</p>
@@ -298,4 +314,5 @@ function DashboardPage() {
 
     );
 }
+//export dashboard page
 export default DashboardPage
