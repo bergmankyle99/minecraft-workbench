@@ -592,9 +592,9 @@ body{
 }
 
 .history-card {
-    width: 160px;
-    min-height: 100px;
-    height: auto;
+    width: 320px;
+    min-height: 90px;
+    height: fit-content;
 
     padding: 14px;
 
