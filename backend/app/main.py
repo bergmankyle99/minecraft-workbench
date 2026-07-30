@@ -167,9 +167,11 @@ def parseStructure(structureStr: str):
         case _:
             raise ValueError(f"Unknown structure: {structureStr}")
 
+#search through the structures and structure_search databases to find a history of searches for the current user
 @app.get("/search-history")
 async def get_search_history(db: db_dependency, user: user_dependency):
-    
+
+    #find searches from search structure where user_id = the users id, order them newest to oldest, and get all
     searches = db.query(models.StructureSearch)\
         .filter(
             models.StructureSearch.user_id == user["id"]
@@ -177,6 +179,9 @@ async def get_search_history(db: db_dependency, user: user_dependency):
 
     results = []
 
+    #from the result of the db query, get each search result and append each structure found for each search
+    # to the list of structures for that search (only one for now), then append that with the seed, type (again), 
+    # and dimension to generate the full data information list for that search
     for search in searches:
 
         structure_list = []
@@ -199,6 +204,7 @@ async def get_search_history(db: db_dependency, user: user_dependency):
     return results
 
 
+#each biome search request will contain the seed, x, z, radius, and the version (to be used later)
 class BiomeSearchRequest(BaseModel):
     seed: int
     x: int = 0
@@ -206,50 +212,62 @@ class BiomeSearchRequest(BaseModel):
     radius: int = 1000
     version: int = 3100  # change to your Minecraft version
 
+
+#convert biome ID to its string alternative for returning
 def biome_to_string(biome_id):
     return f"minecraft:{BiomeID(biome_id).name.lower()}"
 
+
+#find biomes in a search area from spawn
 @app.post("/biome-finder1")
 def find_biomes(request: BiomeSearchRequest):
     print(list(BiomeID))
+    #generate terrain based on version seed, and dimension (in our case the dimension is just overworld)
     generator = Generator(
         MCVersion.MC_1_21,
         request.seed,
         0
     )
 
+    #hold found biomes in dict
     found = {}
 
+    #step this many blocks searching for biome so were not searching 1000x1000 times (millions)
     step = 8
 
+    # find biome at x (bx) by searching from our starting point in our radius and stepping accordingly
+    # example: X = 0 would search -1000 and +1000 stepping at intervals of 8 to find biomes, do this first
     for bx in range(
         request.x - request.radius,
         request.x + request.radius,
         step
     ):
+        #then for each iteration (move in the x direction), search all z coordinate spots the same way, steps of 8
+        # so for every X step, we search 1000 in z negative and 1000 in z positive
         for bz in range(
             request.z - request.radius,
             request.z + request.radius,
             step
         ):
-
+            #do the actual search, with our generator, search biome at x, y=63 (surface), and biome at z
             biome = get_biome_at(
                 generator,
                 bx,
                 63,
                 bz
             )
-
+            #try to convert the biome to a string, if it fails continue to next iteration
             try:
                 biome_name =  biome_to_string(biome)
             except ValueError:
                 continue
 
+            # #if that biome hasnt been found yet, add an empty location in our found dict
+            # if biome_name not in found:
+            #     found[biome_name] = []
+            found[biome_name] = []
 
-            if biome_name not in found:
-                found[biome_name] = []
-
-
+            # append biome location at location corresponding to biome name
             found[biome_name].append({
                 "x": bx,
                 "z": bz
@@ -258,22 +276,25 @@ def find_biomes(request: BiomeSearchRequest):
 
     # Calculate center location of each biome
     biomes = []
-
+    #for each biome and its location in found
     for biome_name, locations in found.items():
-
+        #get the closest to the middle of the biome
         closest = min(
             locations,
+            #For every location, calculate a distance score.
+            #"Look through every structure I found and return the
+            #one whose X/Z coordinates are mathematically closest to where the player searched."
             key=lambda loc: (
                 (loc["x"] - request.x) ** 2 +
                 (loc["z"] - request.z) ** 2
             )
         )
 
-
+        #take center x and z from the closest search
         center_x = closest["x"]
         center_z = closest["z"]
 
-
+        #append biome at x , z, and how many samples to biomes dict list
         biomes.append({
             "biome": biome_name,
             "x": center_x,
@@ -281,32 +302,9 @@ def find_biomes(request: BiomeSearchRequest):
             "samples": len(locations)
         })
 
-
+    #for the search return the seed and list of biomes
     return {
         "seed": request.seed,
         "biomes": biomes
     }
 
-
-@app.get("/test-biome")
-def test_biome():
-
-    seed = 12345
-
-    generator = Generator(
-        MCVersion.MC_1_21,
-        seed,
-        0
-    )
-
-    biome = get_biome_at(
-        generator,
-        -212,
-        63,
-        -29
-    )
-
-    return {
-        "id": biome,
-        "name": biome_to_string(biome)
-    }
