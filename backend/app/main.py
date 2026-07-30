@@ -263,9 +263,8 @@ def find_biomes(request: BiomeSearchRequest):
                 continue
 
             # #if that biome hasnt been found yet, add an empty location in our found dict
-            # if biome_name not in found:
-            #     found[biome_name] = []
-            found[biome_name] = []
+            if biome_name not in found:
+                found[biome_name] = []
 
             # append biome location at location corresponding to biome name
             found[biome_name].append({
