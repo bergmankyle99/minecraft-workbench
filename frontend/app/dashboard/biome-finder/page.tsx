@@ -176,7 +176,7 @@ function BiomeFinderPage() {
 
 
             <div className="body-output">
-
+                <br></br>
                 <div className="history-card">
                     {seedResult !== null && (
                         <h2 className="historyTitle">
