@@ -428,8 +428,12 @@ body{
     .body {
         flex-direction: column;
     }
-
-
+    .history-card {
+      width: 100%;
+    }
+    .history{
+      width: 100%;
+    }
     .side-bar {
         width: 100%;
         height: auto;
