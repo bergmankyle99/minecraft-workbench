@@ -431,6 +431,10 @@ body{
     .history-card {
       width: 100%;
     }
+    .seed-history-card {
+      width: 100%;
+    }
+
     .history{
       width: 100%;
       grid-template-columns: repeat(auto-fill, 100%);
