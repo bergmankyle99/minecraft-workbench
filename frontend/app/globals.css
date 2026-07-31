@@ -433,6 +433,7 @@ body{
     }
     .history{
       width: 100%;
+      grid-template-columns: repeat(auto-fill, 100%);
     }
     .side-bar {
         width: 100%;
