@@ -215,7 +215,7 @@ class BiomeSearchRequest(BaseModel):
 
 #convert biome ID to its string alternative for returning
 def biome_to_string(biome_id):
-    return f"minecraft:{BiomeID(biome_id).name.lower()}"
+    return f"{BiomeID(biome_id).name.lower()}"
 
 
 #find biomes in a search area from spawn
