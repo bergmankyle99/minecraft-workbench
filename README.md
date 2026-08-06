@@ -1,5 +1,6 @@
-<h1 align="center">
+<h1 align="center"><a src="https://minecraftworkbench.ca">
   🟩 Minecraft Workbench
+</a>
 </h1>
 
 <p align="center">
