@@ -1,7 +1,7 @@
 <h1 align="center">
   🟩 Minecraft Workbench
 </h1>
-<p>https://minecraftworkbench.ca/</p>
+<p align="center">https://minecraftworkbench.ca/</p>
 <p align="center">
   A full-stack Minecraft seed analysis and world exploration platform for discovering structures, biomes, and world information from Minecraft seeds.
 </p>
